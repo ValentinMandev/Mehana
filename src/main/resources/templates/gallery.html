@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head">
+    <meta charset="UTF-8">
+    <title>Gallery - My Restaurant</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .gallery-card {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{fragments/commons::navbar}"></nav>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Gallery</h1>
+            <p class="lead">Explore our restaurant through the gallery below. We hope you enjoy these glimpses of our ambiance, dishes, and more.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 1">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 1">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 1</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 2">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 2">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 2</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 3">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 3">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 3</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 4">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 4">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 4</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 5">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 5">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 5</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 6">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 6">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 6</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-card mx-auto">
+            <div class="card">
+                <a href="https://via.placeholder.com/600" data-lightbox="gallery" data-title="Image Title 7">
+                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Placeholder Image 7">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Image Title 7</h5>
+                    <p class="card-text">A brief description of the image.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'alwaysShowNavOnTouchDevices': true
+    });
+</script>
+</body>
+</html>
+
