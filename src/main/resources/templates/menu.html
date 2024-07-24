@@ -2,20 +2,136 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/commons::head">
     <meta charset="UTF-8">
-    <title>Menu - Restaurant</title>
+    <title>Menu - My Restaurant</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .menu-section {
+            margin-top: 50px;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #f8f9fa;
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="fragments/commons :: navbar"></nav>
-<div class="container mt-4">
-    <h1>Menu</h1>
-    <div th:each="category : ${categories}">
-        <h2 th:text="${category.name}">Category Name</h2>
-        <div th:each="product : ${category.products}">
-            <p th:text="${product.name}">Product Name</p>
-            <p th:text="${product.description}">Product Description</p>
-            <p th:text="${product.price}">Product Price</p>
+
+<div class="container menu-section">
+    <h1 class="text-center">Our Menu</h1>
+    <p class="text-center">Explore our wide variety of dishes</p>
+    <ul class="nav nav-tabs justify-content-center" id="menuTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="starters-tab" data-toggle="tab" href="#starters" role="tab" aria-controls="starters" aria-selected="true">Starters</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="main-courses-tab" data-toggle="tab" href="#main-courses" role="tab" aria-controls="main-courses" aria-selected="false">Main Courses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false">Desserts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="beverages-tab" data-toggle="tab" href="#beverages" role="tab" aria-controls="beverages" aria-selected="false">Beverages</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="menuTabsContent">
+        <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Starter 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Starter 1</h5>
+                            <p class="card-text">A delicious description of starter 1.</p>
+                            <p class="card-text"><strong>$5.00</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- More dishes -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-courses-tab">
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Main Course 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Main Course 1</h5>
+                            <p class="card-text">A delicious description of main course 1.</p>
+                            <p class="card-text"><strong>$15.00</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- More dishes -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Dessert 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Dessert 1</h5>
+                            <p class="card-text">A delicious description of dessert 1.</p>
+                            <p class="card-text"><strong>$8.00</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- More dishes -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="beverages" role="tabpanel" aria-labelledby="beverages-tab">
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Beverage 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Beverage 1</h5>
+                            <p class="card-text">A delicious description of beverage 1.</p>
+                            <p class="card-text"><strong>$4.00</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- More dishes -->
+            </div>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

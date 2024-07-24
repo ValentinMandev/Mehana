@@ -10,5 +10,28 @@ body {
     font-size: xx-large !important;
 }
 
+.menu-section {
+    margin-top: 50px;
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    text-align: center;
+}
+.nav-tabs .nav-link {
+    color: #495057;
+}
+.nav-tabs .nav-link.active {
+    background-color: #f8f9fa;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+}
+
+
 
 

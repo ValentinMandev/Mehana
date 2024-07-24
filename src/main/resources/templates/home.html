@@ -2,17 +2,118 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/commons::head">
     <meta charset="UTF-8">
-    <title>Механа Наздраве</title>
+    <title>Home - My Restaurant</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .hero-section {
+            background: url('https://magnolia-kazanlak.com/images/img008.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+        }
+        .featured-dishes img {
+            width: 100%;
+            height: auto;
+        }
+        .testimonial {
+            background: #f8f9fa;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .newsletter {
+            background: #343a40;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="fragments/commons :: navbar"></nav>
-<div class="container">
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1>Welcome to Our Restaurant</h1>
+    <p>Experience the finest dining with us</p>
+    <a href="/menu" class="btn btn-primary btn-lg">View Menu</a>
+</div>
+
+<!-- Featured Dishes -->
+<div class="container mt-5">
+    <h2 class="text-center">Featured Dishes</h2>
     <div class="row">
-        <div class="col">
-            <h1>Welcome to Our Restaurant</h1>
-            <p>Experience the best dining in town.</p>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/400" alt="Dish 1" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Dish 1</h5>
+                    <p class="card-text">A delicious description of dish 1.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/400" alt="Dish 2" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Dish 2</h5>
+                    <p class="card-text">A delicious description of dish 2.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/400" alt="Dish 3" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Dish 3</h5>
+                    <p class="card-text">A delicious description of dish 3.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Testimonials -->
+<div class="container mt-5">
+    <h2 class="text-center">What Our Customers Say</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="testimonial">
+                <p>"The food is amazing and the ambiance is perfect. A great place to dine with family and friends."</p>
+                <h5>- Customer 1</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial">
+                <p>"Excellent service and delicious dishes. Highly recommend this restaurant."</p>
+                <h5>- Customer 2</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial">
+                <p>"A fantastic dining experience. The chefs are incredibly talented and the staff is very welcoming."</p>
+                <h5>- Customer 3</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter Signup -->
+<div class="newsletter mt-5">
+    <h2>Join Our Newsletter</h2>
+    <p>Stay updated with the latest news and special offers.</p>
+    <form class="form-inline justify-content-center">
+        <input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter your email">
+        <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
