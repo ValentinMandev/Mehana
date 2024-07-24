@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head">
+    <meta charset="UTF-8">
+    <title>Shopping Cart - Restaurant</title>
+</head>
+<body>
+<nav th:replace="fragments/commons :: navbar"></nav>
+<div class="container mt-4">
+    <h1>Shopping Cart</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td th:text="${item.product.name}">Product Name</td>
+            <td th:text="${item.quantity}">Quantity</td>
+            <td th:text="${item.product.price}">Price</td>
+            <td th:text="${item.total}">Total</td>
+            <td>
+                <a class="btn btn-danger" th:href="@{/cart/remove/{id}(id=${item.id})}">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <h3>Total: <span th:text="${cart.totalPrice}">Total Price</span></h3>
+        <a class="btn btn-primary" href="#">Checkout</a>
+    </div>
+</div>
+</body>
+</html>

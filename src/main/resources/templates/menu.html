@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head">
+    <meta charset="UTF-8">
+    <title>Menu - Restaurant</title>
+</head>
+<body>
+<nav th:replace="fragments/commons :: navbar"></nav>
+<div class="container mt-4">
+    <h1>Menu</h1>
+    <div th:each="category : ${categories}">
+        <h2 th:text="${category.name}">Category Name</h2>
+        <div th:each="product : ${category.products}">
+            <p th:text="${product.name}">Product Name</p>
+            <p th:text="${product.description}">Product Description</p>
+            <p th:text="${product.price}">Product Price</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
