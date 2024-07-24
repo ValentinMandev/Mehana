@@ -7,8 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <style>
         .hero-section {
-            background: url('https://magnolia-kazanlak.com/images/img008.jpg') no-repeat center center;
-            background-size: cover;
             color: white;
             padding: 150px 0;
             text-align: center;
@@ -35,15 +33,14 @@
 <nav th:replace="fragments/commons :: navbar"></nav>
 
 <!-- Hero Section -->
-<div class="hero-section">
-    <h1>Welcome to Our Restaurant</h1>
-    <p>Experience the finest dining with us</p>
-    <a href="/menu" class="btn btn-primary btn-lg">View Menu</a>
+<div class="hero-section text-center">
+    <h1>Добре дошли в нашият сайт!</h1>
+    <p>Насладете се на вкусните ни гозби!</p>
 </div>
 
 <!-- Featured Dishes -->
 <div class="container mt-5">
-    <h2 class="text-center">Featured Dishes</h2>
+    <h2 class="text-center">Промоции</h2>
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -100,15 +97,6 @@
     </div>
 </div>
 
-<!-- Newsletter Signup -->
-<div class="newsletter mt-5">
-    <h2>Join Our Newsletter</h2>
-    <p>Stay updated with the latest news and special offers.</p>
-    <form class="form-inline justify-content-center">
-        <input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter your email">
-        <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
-    </form>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

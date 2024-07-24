@@ -10,6 +10,10 @@ body {
     font-size: xx-large !important;
 }
 
+.hero-section {
+    margin-top: 50px;
+}
+
 .menu-section {
     margin-top: 50px;
 }
@@ -19,6 +23,7 @@ body {
 }
 .card-body {
     text-align: center;
+    color: #0b2e13;
 }
 .nav-tabs .nav-link {
     color: #495057;
