@@ -1,15 +1,22 @@
 package com.softuni.mehana.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 
-public class OrderEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "orders")
+public class OrderEntity extends BaseEntity {
 
-    @Column(nullable = false)
+    @ManyToOne
     private UserEntity user;
 
     @Column(nullable = false)
@@ -18,8 +25,7 @@ public class OrderEntity {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    @Transient
-    private LinkedHashMap<ProductEntity, Integer> products;
-
+    @OneToMany(fetch = FetchType.EAGER)
+    private LinkedHashSet<CartItem> products;
 
 }

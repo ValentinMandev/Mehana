@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 
 @Getter
 @Setter
@@ -15,8 +15,8 @@ import java.util.LinkedHashMap;
 @Table(name = "carts")
 public class CartEntity extends BaseEntity {
 
-    @Transient
-    private LinkedHashMap<ProductEntity, Integer> products;
+    @OneToMany(fetch = FetchType.EAGER)
+    private LinkedHashSet<CartItem> products;
 
     @Column(nullable = false)
     private BigDecimal price;

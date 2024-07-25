@@ -1,6 +1,5 @@
 package com.softuni.mehana.model.entities;
 
-import com.softuni.mehana.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "user_roles")
-public class UserRoleEntity extends BaseEntity {
+public class CartItem extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRoleEnum role;
+    private int quantity;
+
 }

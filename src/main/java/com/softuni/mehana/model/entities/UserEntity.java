@@ -20,7 +20,6 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     @OneToOne
     private UserRoleEntity role;
 
@@ -30,6 +29,6 @@ public class UserEntity extends BaseEntity {
     @OneToOne
     private CartEntity cart;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
 }
