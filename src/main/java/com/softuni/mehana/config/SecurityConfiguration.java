@@ -19,23 +19,23 @@ public class SecurityConfiguration {
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/", "/about", "/contact", "/gallery", "menu",
-                                                "/users/login", "/users/register", "/error").permitAll()
+                                                "/user/login", "/user/register", "/error").permitAll()
                                         .anyRequest()
                                         .authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
-                                .loginPage("/users/login")
+                                .loginPage("/user/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
                                 // What will happen if the login fails
-                                .failureForwardUrl("/users/login")
+                                .failureForwardUrl("/user/login")
                 )
                 .logout(
                         logout ->
                                 logout
-                                        .logoutUrl("/users/logout")
+                                        .logoutUrl("/user/logout")
                                         .logoutSuccessUrl("/")
                                         .invalidateHttpSession(true)
                 )
