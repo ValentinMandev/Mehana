@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head">
+<head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Menu - My Restaurant</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <div class="container menu-section">
     <h1 class="text-center">Our Menu</h1>

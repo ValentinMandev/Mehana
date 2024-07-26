@@ -1,26 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head">
+<head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Register - Restaurant</title>
 </head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
-<div class="container mt-lg-5" style="width: 300px">
-    <h1>Register</h1>
-    <form th:action="@{/user/register}" th:object="${registerDto}" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" th:field="*{username}">
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
+<div class="container mt-lg-5" style="width: 1200px">
+    <h1 class="text-center">Register</h1>
+    <form th:action="@{/user/register}" th:object="${userRegisterDto}" method="post"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}">
+                <small th:if="${#fields.hasErrors('username')}"
+                       th:errors="*{username}"
+                       th:text="${#fields.errors('username')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+                <small th:if="${#fields.hasErrors('firstName')}"
+                       th:errors="*{firstName}"
+                       th:text="${#fields.errors('firstName')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+                <small th:if="${#fields.hasErrors('lastName')}"
+                       th:errors="*{lastName}"
+                       th:text="${#fields.errors('lastName')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}">
+                <small th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"
+                       th:text="${#fields.errors('email')}"
+                       class="danger"></small>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}">
+
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="phoneNumber">Phone number</label>
+                <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+                <small th:if="${#fields.hasErrors('phoneNumber')}"
+                       th:errors="*{phoneNumber}"
+                       th:text="${#fields.errors('phoneNumber')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" th:field="*{address}">
+                <small th:if="${#fields.hasErrors('address')}"
+                       th:errors="*{address}"
+                       th:text="${#fields.errors('address')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}">
+                <small th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"
+                       th:text="${#fields.errors('password')}"
+                       class="danger"></small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="confirmPassword">Confirm password</label>
+                <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}">
+                <small th:if="${#fields.hasErrors('confirmPassword')}"
+                       th:errors="*{confirmPassword}"
+                       th:text="${#fields.errors('confirmPassword')}"
+                       class="danger"></small>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}">
-        </div>
+
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>

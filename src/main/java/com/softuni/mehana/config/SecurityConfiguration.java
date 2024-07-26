@@ -29,7 +29,6 @@ public class SecurityConfiguration {
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
-                                // What will happen if the login fails
                                 .failureForwardUrl("/user/login")
                 )
                 .logout(

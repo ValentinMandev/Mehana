@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head">
+<head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Login - Restaurant</title>
 </head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
 <div class="container mt-lg-5" style="width: 300px">
     <h1>Login</h1>
     <form th:action="@{/user/login}" method="post">

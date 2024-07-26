@@ -1,42 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head">
+<head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Contact Us - My Restaurant</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Contact Us</h2>
-            <form>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <h2>Get in Touch</h2>
-            <p><strong>Address:</strong> 123 Main Street, Anytown, USA</p>
-            <p><strong>Phone:</strong> (123) 456-7890</p>
-            <p><strong>Email:</strong> contact@myrestaurant.com</p>
-            <h3>Find Us</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.9171983163115!2d-122.0842494846913!3d37.42199977982525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb0a567d67bbf%3A0xc58de67b4b7df3b!2sGoogleplex!5e0!3m2!1sen!2sus!4v1593812842308!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
+<div class="container mt-12" style="width: 1200px">
+    <div class="row main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <h2>Get in Touch</h2>
+        <p><strong>Address:</strong> 123 Main Street, Anytown, USA</p>
+        <p><strong>Phone:</strong> (123) 456-7890</p>
+        <p><strong>Email:</strong> contact@myrestaurant.com</p>
+    </div>
+    <div class="row main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <h3>Find Us</h3>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d211.89527638545576!2d23.3734603726445!3d42.651824417729145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbg!2sbg!4v1722029968754!5m2!1sbg!2sbg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </div>

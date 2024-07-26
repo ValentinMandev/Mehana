@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head">
+<head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Home - My Restaurant</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <!-- Hero Section -->
 <div class="hero-section text-center">
