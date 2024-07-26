@@ -20,7 +20,7 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
+    @ManyToOne
     private UserRoleEntity role;
 
     @OneToOne
