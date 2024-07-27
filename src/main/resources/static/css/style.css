@@ -57,6 +57,14 @@ body {
     object-position: center;
 }
 
+.review-name {
+    position: absolute;
+    bottom: 0;
+}
+
+.review-card {
+    height: 135px;
+}
 
 
 
