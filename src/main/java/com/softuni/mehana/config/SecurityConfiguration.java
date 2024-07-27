@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
-                                .failureForwardUrl("/user/login")
+                                .failureUrl("/user/login?error")
                 )
                 .logout(
                         logout ->
@@ -43,11 +43,6 @@ public class SecurityConfiguration {
                 .build();
     }
 
-
-    @Bean
-    public UserDetailsServiceImpl userDetailsService(UserRepository userRepository) {
-        return new UserDetailsServiceImpl(userRepository);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

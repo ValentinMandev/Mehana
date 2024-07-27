@@ -1,7 +1,7 @@
 package com.softuni.mehana.service.implementation;
 
 import com.softuni.mehana.model.dto.UserRegisterDto;
-import com.softuni.mehana.model.entities.UserDetailsEntity;
+import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.model.entities.UserInfoEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;

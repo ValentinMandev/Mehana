@@ -1,6 +1,6 @@
-package com.softuni.mehana.model.entities;
+package com.softuni.mehana.model.userdetails;
 
-import jakarta.persistence.*;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,23 +12,19 @@ import java.util.Collection;
 @Setter
 public class UserDetailsEntity extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, name = "first_name")
+    private final UUID uuid;
     private String firstName;
 
 
     public UserDetailsEntity(
-            Long id,
+            UUID uuid,
             String username,
             String password,
             String firstName,
             Collection<? extends GrantedAuthority> authorities
     ) {
         super(username, password, authorities);
-        this.id = id;
+        this.uuid = uuid;
         this.firstName = firstName;
     }
 

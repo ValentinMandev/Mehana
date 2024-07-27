@@ -1,6 +1,5 @@
 package com.softuni.mehana.controller.user;
 
-import com.softuni.mehana.model.dto.UserLoginDto;
 import com.softuni.mehana.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +16,6 @@ public class LoginController {
 
     @GetMapping("/user/login")
     public String login(Model model) {
-
-        if (!model.containsAttribute("userLoginDto")) {
-            model.addAttribute("userLoginDto", UserLoginDto.empty());
-        }
-
         return "login";
     }
 

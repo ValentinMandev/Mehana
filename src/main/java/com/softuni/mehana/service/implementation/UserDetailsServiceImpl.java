@@ -1,7 +1,7 @@
 package com.softuni.mehana.service.implementation;
 
 import com.softuni.mehana.model.entities.UserEntity;
-import com.softuni.mehana.model.entities.UserDetailsEntity;
+import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.model.entities.UserRoleEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;
 import com.softuni.mehana.repository.UserRepository;
@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private static UserDetailsEntity map(UserEntity userEntity) {
 
         return new UserDetailsEntity(
-                userEntity.getId(),
+                userEntity.getUuid(),
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getUserInfo().getFirstName(),

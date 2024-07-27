@@ -1,7 +1,7 @@
 package com.softuni.mehana.service;
 
 import com.softuni.mehana.model.dto.UserRegisterDto;
-import com.softuni.mehana.model.entities.UserDetailsEntity;
+import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 
 import java.util.Optional;
 
