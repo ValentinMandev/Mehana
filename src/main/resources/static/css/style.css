@@ -52,6 +52,12 @@ body {
     object-position: center;
 }
 
+.card-img-top {
+    object-fit: cover;
+    object-position: center;
+}
+
+
 
 
 
