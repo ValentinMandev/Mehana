@@ -46,8 +46,6 @@ public class RegisterController {
             return "register";
         }
 
-        System.out.println("OK");
-
         userService.registerUser(userRegisterDto);
         return "redirect:/";
     }

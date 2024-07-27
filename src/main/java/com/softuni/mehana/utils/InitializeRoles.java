@@ -18,13 +18,15 @@ public class InitializeRoles implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserRoleEntity admin = new UserRoleEntity();
-        admin.setRole(UserRoleEnum.ADMIN);
-        userRoleRepository.save(admin);
+        if (userRoleRepository.count() == 0) {
+            UserRoleEntity admin = new UserRoleEntity();
+            admin.setRole(UserRoleEnum.ADMIN);
+            userRoleRepository.save(admin);
 
-        UserRoleEntity user = new UserRoleEntity();
-        user.setRole(UserRoleEnum.USER);
-        userRoleRepository.save(user);
+            UserRoleEntity user = new UserRoleEntity();
+            user.setRole(UserRoleEnum.USER);
+            userRoleRepository.save(user);
+        }
 
     }
 
