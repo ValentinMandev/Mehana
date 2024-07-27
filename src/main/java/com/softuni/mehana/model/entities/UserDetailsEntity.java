@@ -2,31 +2,34 @@ package com.softuni.mehana.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
-import java.util.List;
+import java.util.Collection;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Entity
-@Table(name = "user_details")
-public class UserDetailsEntity extends BaseEntity{
+public class UserDetailsEntity extends User {
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, name = "first_name")
     private String firstName;
 
-    @Column(nullable = false, name = "last_name")
-    private String lastName;
 
-    @Column(nullable = false, name = "phone_number")
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String address;
+    public UserDetailsEntity(
+            Long id,
+            String username,
+            String password,
+            String firstName,
+            Collection<? extends GrantedAuthority> authorities
+    ) {
+        super(username, password, authorities);
+        this.id = id;
+        this.firstName = firstName;
+    }
 
 }

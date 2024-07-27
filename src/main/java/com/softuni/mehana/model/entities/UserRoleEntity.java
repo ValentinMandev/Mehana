@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "user_roles")
 public class UserRoleEntity extends BaseEntity {
 
     @Column(nullable = false)

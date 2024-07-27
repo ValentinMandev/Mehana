@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,11 +21,18 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne
-    private UserRoleEntity role;
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<UserRoleEntity> roles = new ArrayList<>();
 
     @OneToOne
-    private UserDetailsEntity userDetails;
+    private UserInfoEntity userInfo;
 
     @OneToOne
     private CartEntity cart;

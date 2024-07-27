@@ -3,15 +3,19 @@ package com.softuni.mehana.service.implementation;
 import com.softuni.mehana.model.dto.UserRegisterDto;
 import com.softuni.mehana.model.entities.UserDetailsEntity;
 import com.softuni.mehana.model.entities.UserEntity;
-import com.softuni.mehana.model.entities.UserRoleEntity;
+import com.softuni.mehana.model.entities.UserInfoEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;
-import com.softuni.mehana.repository.UserDetailsRepository;
+import com.softuni.mehana.repository.UserInfoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.repository.UserRoleRepository;
 import com.softuni.mehana.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,25 +24,25 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
-    private final UserDetailsRepository userDetailsRepository;
+    private final UserInfoRepository userInfoRepository;
 
     public UserServiceImpl(ModelMapper modelMapper, PasswordEncoder passwordEncoder,
                            UserRepository userRepository, UserRoleRepository userRoleRepository,
-                           UserDetailsRepository userDetailsRepository) {
+                           UserInfoRepository userInfoRepository) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
-        this.userDetailsRepository = userDetailsRepository;
+        this.userInfoRepository = userInfoRepository;
     }
 
     @Override
     public void registerUser(UserRegisterDto userRegisterDto) {
-        UserDetailsEntity userDetails = mapToUserDetailsEntity(userRegisterDto);
+        UserInfoEntity userInfo = mapToUserInfoEntity(userRegisterDto);
 
         UserEntity userEntity = mapToUserEntity(userRegisterDto);
-        userEntity.setUserDetails(userDetails);
-        userEntity.setRole(userRoleRepository.findByRole(UserRoleEnum.USER).orElse(null));
+        userEntity.setUserInfo(userInfo);
+        userEntity.getRoles().add(userRoleRepository.findByRole(UserRoleEnum.USER).orElse(null));
 
         userRepository.save(userEntity);
     }
@@ -49,9 +53,19 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private UserDetailsEntity mapToUserDetailsEntity(UserRegisterDto userRegisterDto) {
-        UserDetailsEntity userDetails = modelMapper.map(userRegisterDto, UserDetailsEntity.class);
-        userDetailsRepository.save(userDetails);
-        return userDetails;
+    private UserInfoEntity mapToUserInfoEntity(UserRegisterDto userRegisterDto) {
+        UserInfoEntity userInfoEntity = modelMapper.map(userRegisterDto, UserInfoEntity.class);
+        userInfoRepository.save(userInfoEntity);
+        return userInfoEntity;
+    }
+
+    @Override
+    public Optional<UserDetailsEntity> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null &&
+                authentication.getPrincipal() instanceof UserDetailsEntity userDetails) {
+            return Optional.of(userDetails);
+        }
+        return Optional.empty();
     }
 }

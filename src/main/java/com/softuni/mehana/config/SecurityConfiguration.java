@@ -1,5 +1,7 @@
 package com.softuni.mehana.config;
 
+import com.softuni.mehana.repository.UserRepository;
+import com.softuni.mehana.service.implementation.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +43,11 @@ public class SecurityConfiguration {
                 .build();
     }
 
+
+    @Bean
+    public UserDetailsServiceImpl userDetailsService(UserRepository userRepository) {
+        return new UserDetailsServiceImpl(userRepository);
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
