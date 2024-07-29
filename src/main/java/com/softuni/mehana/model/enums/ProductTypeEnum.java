@@ -2,5 +2,5 @@ package com.softuni.mehana.model.enums;
 
 public enum ProductTypeEnum {
 
-    SALADS, STARTERS, SOUPS, MAIN_COURSES, DESSERTS, BEVERAGES
+    STARTERS, SOUPS, MAIN_COURSES, DESSERTS, BREAD
 }

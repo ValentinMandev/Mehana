@@ -36,27 +36,32 @@
     <p class="text-center">Explore our wide variety of dishes</p>
     <ul class="nav nav-tabs justify-content-center" id="menuTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="starters-tab" data-toggle="tab" href="#starters" role="tab" aria-controls="starters" aria-selected="true">Starters</a>
+            <a class="nav-link active" id="starters-tab" data-toggle="tab" href="#starters" role="tab" aria-controls="starters" aria-selected="true">Салати и предястия</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="main-courses-tab" data-toggle="tab" href="#main-courses" role="tab" aria-controls="main-courses" aria-selected="false">Main Courses</a>
+            <a class="nav-link" id="soups-tab" data-toggle="tab" href="#soups" role="tab" aria-controls="soups" aria-selected="false">Супи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false">Desserts</a>
+            <a class="nav-link" id="main-courses-tab" data-toggle="tab" href="#main-courses" role="tab" aria-controls="main-courses" aria-selected="false">Основни ястия</a>
         </li>
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link" id="beverages-tab" data-toggle="tab" href="#beverages" role="tab" aria-controls="beverages" aria-selected="false">Beverages</a>-->
-<!--        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" id="bread-tab" data-toggle="tab" href="#bread" role="tab" aria-controls="bread" aria-selected="false">Хляб</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false">Десерти</a>
+        </li>
+
     </ul>
     <div class="tab-content" id="menuTabsContent">
         <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-4" th:each="p: ${starters}">
                     <div class="card menu-card">
-                        <img src="/images/menu/prediastia/manatarki.jpg" class="card-img-top" alt="Манатарки в масло">
+                        <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title">Манатарки в масло</h5>
-                            <p class="card-text"><strong>10.00 лв.</strong></p>
+                            <h5 class="card-title" th:text="*{p.name}"></h5>
+                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>
@@ -64,43 +69,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/prediastia/sirenca.jpg" class="card-img-top" alt="Топени сиренца в корнфлейкс с боровинково сладко">
-                        <div class="card-body">
-                            <h5 class="card-title">Топени сиренца със сладко</h5>
-                            <p class="card-text"><strong>8.00 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/prediastia/kartofki.jpg" class="card-img-top" alt="Пържени картофи със сирене">
-                        <div class="card-body">
-                            <h5 class="card-title">Пържени картофи със сирене</h5>
-                            <p class="card-text"><strong>4.50 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- More dishes -->
             </div>
         </div>
+
+        <div class="tab-pane fade" id="soups" role="tabpanel" aria-labelledby="soups-tab">
+            <div class="row mt-4">
+                <div class="col-md-4" th:each="p: ${soups}">
+                    <div class="card menu-card">
+                        <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="*{p.name}"></h5>
+                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Добави в количката</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-courses-tab">
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-4" th:each="p: ${main}">
                     <div class="card menu-card">
-                        <img src="/images/menu/osnovni/teleshki-djolan.jpg" class="card-img-top" alt="Телешки джолан с гъби">
+                        <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title">Телешки джолан с гъби</h5>
-                            <p class="card-text"><strong>15.00 лв.</strong></p>
+                            <h5 class="card-title" th:text="*{p.name}"></h5>
+                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>
@@ -108,43 +107,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/osnovni/pileshka-kavarma.jpg" class="card-img-top" alt="Пилешка кавърма">
-                        <div class="card-body">
-                            <h5 class="card-title">Пилешка кавърма</h5>
-                            <p class="card-text"><strong>11.00 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/osnovni/svinsko-kontrafile.jpg" class="card-img-top" alt="Свинско контрафиле с лук на тиган">
-                        <div class="card-body">
-                            <h5 class="card-title">Свинско контрафиле с лук</h5>
-                            <p class="card-text"><strong>13.00 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- More dishes -->
             </div>
         </div>
+
+        <div class="tab-pane fade" id="bread" role="tabpanel" aria-labelledby="bread-tab">
+            <div class="row mt-4">
+                <div class="col-md-4" th:each="p: ${bread}">
+                    <div class="card">
+                        <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="*{p.name}"></h5>
+                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <div class="d-flex justify-content-center">
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                                <button class="btn btn-primary ml-2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-4" th:each="p: ${desserts}">
                     <div class="card menu-card">
-                        <img src="/images/menu/deserti/melba.jpg" class="card-img-top" alt="Мелба">
+                        <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title">Мелба</h5>
-                            <p class="card-text"><strong>5.00 лв.</strong></p>
+                            <h5 class="card-title" th:text="*{p.name}"></h5>
+                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>
@@ -152,79 +145,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/deserti/krem-karamel.jpg" class="card-img-top" alt="Крем карамел">
-                        <div class="card-body">
-                            <h5 class="card-title">Крем карамел</h5>
-                            <p class="card-text"><strong>4.50 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card menu-card">
-                        <img src="/images/menu/deserti/cedeno-mliako.jpg" class="card-img-top" alt="Цедено кисело мляко">
-                        <div class="card-body">
-                            <h5 class="card-title">Цедено кисело мляко</h5>
-                            <p class="card-text"><strong>5.00 лв.</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Добави в количката</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- More dishes -->
             </div>
         </div>
-        <div class="tab-pane fade" id="beverages" role="tabpanel" aria-labelledby="beverages-tab">
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Beverage 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Beverage 1</h5>
-                            <p class="card-text"><strong>$4.00</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Beverage 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Beverage 1</h5>
-                            <p class="card-text"><strong>$4.00</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400" class="card-img-top" alt="Beverage 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Beverage 1</h5>
-                            <p class="card-text"><strong>$4.00</strong></p>
-                            <div class="d-flex justify-content-center">
-                                <input type="number" class="form-control quantity-input" value="1" min="1">
-                                <button class="btn btn-primary ml-2">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- More dishes -->
-            </div>
-        </div>
+
     </div>
 </div>
 

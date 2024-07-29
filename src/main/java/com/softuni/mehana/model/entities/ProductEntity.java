@@ -22,8 +22,8 @@ public class ProductEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductTypeEnum type;
 
-    @Column(nullable = false)
-    private String description;
+    @Column(nullable = false, name = "name_eng")
+    private String nameEng;
 
     @Column(nullable = false, name = "image_url")
     private String imageUrl;
