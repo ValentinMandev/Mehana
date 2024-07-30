@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public boolean comparePasswords(UserRegisterDto userRegisterDto) {
+        return userRegisterDto.getPassword().equals(userRegisterDto.getConfirmPassword());
+    }
 }

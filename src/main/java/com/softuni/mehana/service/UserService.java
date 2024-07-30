@@ -9,4 +9,6 @@ public interface UserService {
     void registerUser(UserRegisterDto registerDTO);
 
     Optional<UserDetailsEntity> getCurrentUser();
+
+    boolean comparePasswords(UserRegisterDto userRegisterDto);
 }

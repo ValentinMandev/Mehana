@@ -33,6 +33,8 @@ public class UserRegisterDto {
     @NotEmpty(message = "{field.empty}")
     private String address;
 
+    boolean passwordMatching;
+
     public static UserRegisterDto empty() {
         return new UserRegisterDto();
     }

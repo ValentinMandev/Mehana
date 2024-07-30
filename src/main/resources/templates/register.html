@@ -84,7 +84,14 @@
                        th:text="${#fields.errors('confirmPassword')}"
                        class="danger"></small>
             </div>
+
+
         </div>
+
+        <small th:if="${#fields.hasErrors('passwordMatching') && !#fields.hasErrors('confirmPassword')}"
+               th:errors="*{passwordMatching}"
+               th:text="${#fields.errors('passwordMatching')}"
+               class="danger text-center pass-not-match font-weight-bold"></small>
 
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
