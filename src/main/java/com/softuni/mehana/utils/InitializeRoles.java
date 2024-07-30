@@ -4,8 +4,10 @@ import com.softuni.mehana.model.entities.UserRoleEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;
 import com.softuni.mehana.repository.UserRoleRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Order(1)
 @Component
 public class InitializeRoles implements CommandLineRunner {
 

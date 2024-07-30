@@ -31,7 +31,8 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @ManyToMany(
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
     )
     @JoinTable(
             name = "users_roles",
@@ -47,5 +48,10 @@ public class UserEntity extends BaseEntity {
     private CartEntity cart;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "users_orders",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
     private List<OrderEntity> orders;
 }

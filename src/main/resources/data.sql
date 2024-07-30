@@ -1,5 +1,6 @@
 use mehana;
 
+-- Products
 insert into products(id, type, name, name_eng, price, image_url) values (1, 'STARTERS', 'Шопска салата', 'Shopska salad', 7.00, '/images/menu/prediastia/shopska.jpg');
 insert into products(id, type, name, name_eng, price, image_url) values (2, 'STARTERS', 'Зелена салата', 'Green salad', 8.00, '/images/menu/prediastia/zelena.jpg');
 insert into products(id, type, name, name_eng, price, image_url) values (3, 'STARTERS', 'Зелева салата', 'Cabbage salad', 6.00, '/images/menu/prediastia/zeleva.jpg');
