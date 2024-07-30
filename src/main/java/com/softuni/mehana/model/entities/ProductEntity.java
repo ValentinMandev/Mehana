@@ -31,4 +31,10 @@ public class ProductEntity extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
+    private boolean isOnPromotion;
+
+    @Column
+    private BigDecimal promoPrice;
+
 }

@@ -60,6 +60,7 @@ body {
 .review-name {
     position: absolute;
     bottom: 0;
+    height: 5px;
 }
 
 .review-card {

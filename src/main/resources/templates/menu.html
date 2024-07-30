@@ -61,7 +61,10 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="*{p.name}"></h5>
                             <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                                <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
+                                лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>
@@ -99,7 +102,10 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="*{p.name}"></h5>
                             <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                                <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
+                                лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>
@@ -137,7 +143,10 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="*{p.name}"></h5>
                             <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                                <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
+                                лв.</strong></p>
                             <div class="d-flex justify-content-center">
                                 <input type="number" class="form-control quantity-input" value="1" min="1">
                                 <button class="btn btn-primary ml-2">Добави в количката</button>

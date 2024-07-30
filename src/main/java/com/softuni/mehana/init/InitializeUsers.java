@@ -1,4 +1,4 @@
-package com.softuni.mehana.utils;
+package com.softuni.mehana.init;
 
 import com.softuni.mehana.model.dto.UserRegisterDto;
 import com.softuni.mehana.model.entities.UserEntity;
