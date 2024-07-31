@@ -51,10 +51,15 @@
                     <p class="card-text text-success"><strong><del th:text="*{p.getProduct().price}" class="text-danger"></del>
                         <span th:text="*{#numbers.formatDecimal(p.getProduct().promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
                         лв.</strong></p>
-                    <div class="d-flex justify-content-center">
-                        <input type="number" class="form-control quantity-input" value="1" min="1">
-                        <button class="btn btn-primary ml-2">Добави в количката</button>
-                    </div>
+                    <form
+                       th:method="post"
+                       th:action="@{/cart/add}">
+                        <div class="d-flex justify-content-center">
+                            <input type="hidden" name="productId" th:value="${p.getProduct().id}">
+                            <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
+                            <button class="btn btn-primary ml-2">Добави в количката</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

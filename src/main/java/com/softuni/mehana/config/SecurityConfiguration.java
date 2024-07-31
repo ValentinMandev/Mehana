@@ -1,5 +1,6 @@
 package com.softuni.mehana.config;
 
+import com.softuni.mehana.model.enums.UserRoleEnum;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.service.implementation.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -22,6 +23,11 @@ public class SecurityConfiguration {
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/", "/about", "/contact", "/gallery", "menu",
                                                 "/user/login", "/user/register", "/error").permitAll()
+                                        .requestMatchers("/menu/**",
+                                                "/menu",
+                                                "/",
+                                                "/cart/add",
+                                                "/cart").hasRole(UserRoleEnum.USER.name())
                                         .anyRequest()
                                         .authenticated()
                 )

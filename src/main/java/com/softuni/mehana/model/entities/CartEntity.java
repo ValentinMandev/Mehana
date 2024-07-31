@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,10 +16,15 @@ import java.util.LinkedHashSet;
 @Table(name = "carts")
 public class CartEntity extends BaseEntity {
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private LinkedHashSet<CartItem> products;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "carts_cart_items",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id")
+    )
+    private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.ZERO;
 
 }

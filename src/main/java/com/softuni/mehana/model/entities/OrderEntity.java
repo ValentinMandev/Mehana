@@ -26,6 +26,10 @@ public class OrderEntity extends BaseEntity {
     private LocalDateTime time;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id")
+    )
     private LinkedHashSet<CartItem> products;
 
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
-<div class="container mt-4">
+<div class="container mt-4" th:if="${price > 0}">
     <h1>Shopping Cart</h1>
     <table class="table">
         <thead>
@@ -19,11 +19,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${cart.items}">
-            <td th:text="${item.product.name}">Product Name</td>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.getProduct().name}">Product Name</td>
             <td th:text="${item.quantity}">Quantity</td>
-            <td th:text="${item.product.price}">Price</td>
-            <td th:text="${item.total}">Total</td>
+            <td th:text="${item.price}">Price</td>
+            <td th:text="${item.totalPrice}">Total</td>
             <td>
                 <a class="btn btn-danger" th:href="@{/cart/remove/{id}(id=${item.id})}">Remove</a>
             </td>
@@ -31,9 +31,14 @@
         </tbody>
     </table>
     <div class="text-right">
-        <h3>Total: <span th:text="${cart.totalPrice}">Total Price</span></h3>
+        <h3>Total: <span th:text="${price}">Total Price</span></h3>
         <a class="btn btn-primary" href="#">Checkout</a>
     </div>
 </div>
+
+<div th:if="${price == 0}">
+    <h5 class="text-center">Количката Ви е празна!</h5>
+</div>
+
 </body>
 </html>
