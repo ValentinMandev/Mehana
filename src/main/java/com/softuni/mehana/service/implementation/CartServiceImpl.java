@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -41,10 +42,16 @@ public class CartServiceImpl implements CartService {
             cart = new CartEntity();
         }
 
-        CartItem cartItem = new CartItem();
         ProductEntity product = productRepository.findById(productId).orElse(null);
+        CartItem cartItem;
 
-        if (product != null) {
+        List<CartItem> existing = cart.getCartItems().stream().filter(i -> i.getProduct().getId().equals(product.getId())).toList();
+
+        if (!existing.isEmpty()) {
+            cartItem = existing.get(0);
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+        } else {
+            cartItem = new CartItem();
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
         }
@@ -58,7 +65,7 @@ public class CartServiceImpl implements CartService {
             currentPrice = product.getPrice();
         }
 
-        BigDecimal itemPrice = currentPrice.multiply(BigDecimal.valueOf(quantity));
+        BigDecimal itemPrice = currentPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
 
         cartItem.setPrice(currentPrice);
         cartItem.setTotalPrice(itemPrice);

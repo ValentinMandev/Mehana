@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 
 @Component
-public class ResetCart {
+public class ResetCarts {
 
     UserRepository userRepository;
     CartRepository cartRepository;
 
-    public ResetCart(UserRepository userRepository, CartRepository cartRepository) {
+    public ResetCarts(UserRepository userRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
     }
