@@ -1,8 +1,7 @@
 package com.softuni.mehana.controller;
 
-import com.softuni.mehana.model.enums.ProductTypeEnum;
 import com.softuni.mehana.model.userdetails.UserDetailsEntity;
-import com.softuni.mehana.utils.RandomizePromotions;
+import com.softuni.mehana.repository.PromoRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,10 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private final RandomizePromotions promotions;
+    private final PromoRepository promoRepository;
 
-    public HomeController(RandomizePromotions promotions) {
-        this.promotions = promotions;
+    public HomeController(PromoRepository promoRepository) {
+        this.promoRepository = promoRepository;
     }
 
     @GetMapping("/")
@@ -25,11 +24,7 @@ public class HomeController {
             model.addAttribute("welcomeMessage", userDetailsEntity.getFirstName());
         }
 
-        promotions.clearPromotions();
-
-        model.addAttribute("promotionStarter", promotions.getRandomProduct(ProductTypeEnum.STARTERS));
-        model.addAttribute("promotionMain", promotions.getRandomProduct(ProductTypeEnum.MAIN_COURSES));
-        model.addAttribute("promotionDessert", promotions.getRandomProduct(ProductTypeEnum.DESSERTS));
+        model.addAttribute("promotions", promoRepository.findAll());
 
         return "home";
     }

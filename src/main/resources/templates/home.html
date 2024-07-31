@@ -42,46 +42,14 @@
 <div class="container mt-5">
     <h2 class="text-center">Промоции</h2>
     <div class="row">
-        <div class="col-md-4" th:object="${promotionStarter}">
+        <div class="col-md-4" th:each="p : ${promotions}">
             <div class="card">
-                <img th:src="*{imageUrl}" th:alt="*{nameEng}" class="card-img-top">
+                <img th:src="*{p.getProduct().imageUrl}" th:alt="*{p.getProduct().nameEng}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="*{name}"></h5>
-                    <h5 class="card-title" th:text="*{nameEng}"></h5>
-                    <p class="card-text text-success"><strong><del th:text="*{price}" class="text-danger"></del>
-                        <span th:text="*{#numbers.formatDecimal(promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                        лв.</strong></p>
-                    <div class="d-flex justify-content-center">
-                        <input type="number" class="form-control quantity-input" value="1" min="1">
-                        <button class="btn btn-primary ml-2">Добави в количката</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4" th:object="${promotionMain}">
-            <div class="card">
-                <img th:src="*{imageUrl}" th:alt="*{nameEng}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="*{name}"></h5>
-                    <h5 class="card-title" th:text="*{nameEng}"></h5>
-                    <p class="card-text text-success"><strong><del th:text="*{price}" class="text-danger"></del>
-                        <span th:text="*{#numbers.formatDecimal(promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                        лв.</strong></p>
-                    <div class="d-flex justify-content-center">
-                        <input type="number" class="form-control quantity-input" value="1" min="1">
-                        <button class="btn btn-primary ml-2">Добави в количката</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4" th:object="${promotionDessert}">
-            <div class="card">
-                <img th:src="*{imageUrl}" th:alt="*{nameEng}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="*{name}"></h5>
-                    <h5 class="card-title" th:text="*{nameEng}"></h5>
-                    <p class="card-text text-success"><strong><del th:text="*{price}" class="text-danger"></del>
-                        <span th:text="*{#numbers.formatDecimal(promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
+                    <h5 class="card-title" th:text="*{p.getProduct().name}"></h5>
+                    <h5 class="card-title" th:text="*{p.getProduct().nameEng}"></h5>
+                    <p class="card-text text-success"><strong><del th:text="*{p.getProduct().price}" class="text-danger"></del>
+                        <span th:text="*{#numbers.formatDecimal(p.getProduct().promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
                         лв.</strong></p>
                     <div class="d-flex justify-content-center">
                         <input type="number" class="form-control quantity-input" value="1" min="1">
