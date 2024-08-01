@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "cart_items")
 public class CartItem extends BaseEntity {
 
     @ManyToOne

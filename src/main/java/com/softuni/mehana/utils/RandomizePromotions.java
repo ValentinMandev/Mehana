@@ -24,7 +24,7 @@ public class RandomizePromotions {
         this.promoRepository = promoRepository;
     }
 
-    @Scheduled(cron = "0 0 8 * * *", zone = "UTC")
+    @Scheduled(cron = "0 50 15 * * *", zone = "GMT+3")
     public void definePromotions() {
         clearPromotions();
 

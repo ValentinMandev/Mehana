@@ -70,7 +70,7 @@ public class CartServiceImpl implements CartService {
         cartItem.setPrice(currentPrice);
         cartItem.setTotalPrice(itemPrice);
 
-        cart.setPrice(cart.getPrice().add(itemPrice));
+        cart.setPrice(cart.getPrice().add(currentPrice.multiply(BigDecimal.valueOf(quantity))));
         cartRepository.save(cart);
 
         user.setCart(cart);
