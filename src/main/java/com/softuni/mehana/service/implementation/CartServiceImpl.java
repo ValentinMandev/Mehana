@@ -1,14 +1,13 @@
 package com.softuni.mehana.service.implementation;
 
 import com.softuni.mehana.model.entities.CartEntity;
-import com.softuni.mehana.model.entities.CartItem;
+import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.ProductEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.repository.CartRepository;
 import com.softuni.mehana.repository.ProductRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.service.CartService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,6 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -43,20 +41,20 @@ public class CartServiceImpl implements CartService {
         }
 
         ProductEntity product = productRepository.findById(productId).orElse(null);
-        CartItem cartItem;
+        CartItemEntity cartItemEntity;
 
-        List<CartItem> existing = cart.getCartItems().stream().filter(i -> i.getProduct().getId().equals(product.getId())).toList();
+        List<CartItemEntity> existing = cart.getCartItemEntities().stream().filter(i -> i.getProduct().getId().equals(product.getId())).toList();
 
         if (!existing.isEmpty()) {
-            cartItem = existing.get(0);
-            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            cartItemEntity = existing.get(0);
+            cartItemEntity.setQuantity(cartItemEntity.getQuantity() + quantity);
         } else {
-            cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setQuantity(quantity);
+            cartItemEntity = new CartItemEntity();
+            cartItemEntity.setProduct(product);
+            cartItemEntity.setQuantity(quantity);
         }
 
-        cart.getCartItems().add(cartItem);
+        cart.getCartItemEntities().add(cartItemEntity);
 
         BigDecimal currentPrice;
         if (product.isOnPromotion()) {
@@ -65,10 +63,10 @@ public class CartServiceImpl implements CartService {
             currentPrice = product.getPrice();
         }
 
-        BigDecimal itemPrice = currentPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        BigDecimal itemPrice = currentPrice.multiply(BigDecimal.valueOf(cartItemEntity.getQuantity()));
 
-        cartItem.setPrice(currentPrice);
-        cartItem.setTotalPrice(itemPrice);
+        cartItemEntity.setPrice(currentPrice);
+        cartItemEntity.setTotalPrice(itemPrice);
 
         cart.setPrice(cart.getPrice().add(currentPrice.multiply(BigDecimal.valueOf(quantity))));
         cartRepository.save(cart);
@@ -90,11 +88,28 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Set<CartItem> getCartItems(CartEntity cart) {
+    public Set<CartItemEntity> getCartItems(CartEntity cart) {
         if (cart == null) {
             return new HashSet<>();
         }
 
-        return cart.getCartItems();
+        return cart.getCartItemEntities();
+    }
+
+    @Override
+    public void remove(Long id, UserDetails userDetails) {
+        CartEntity cart = getCart(userDetails);
+        CartItemEntity cartItemEntity = cart.getCartItemEntities().stream().filter(i -> i.getId().equals(id)).toList().get(0);
+        cart.getCartItemEntities().remove(cartItemEntity);
+        cart.setPrice(cart.getPrice().subtract(cartItemEntity.getTotalPrice()));
+        cartRepository.save(cart);
+    }
+
+    @Override
+    public void clearCart(UserDetails userDetails) {
+        CartEntity cart = getCart(userDetails);
+        cart.setCartItemEntities(new HashSet<>());
+        cart.setPrice(BigDecimal.ZERO);
+        cartRepository.save(cart);
     }
 }

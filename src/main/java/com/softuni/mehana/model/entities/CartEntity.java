@@ -22,7 +22,7 @@ public class CartEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_item_id")
     )
-    private Set<CartItem> cartItems = new LinkedHashSet<>();
+    private Set<CartItemEntity> cartItemEntities = new LinkedHashSet<>();
 
     @Column(nullable = false)
     private BigDecimal price = BigDecimal.ZERO;

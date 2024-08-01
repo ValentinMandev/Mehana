@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "cart_items")
-public class CartItem extends BaseEntity {
+public class CartItemEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")

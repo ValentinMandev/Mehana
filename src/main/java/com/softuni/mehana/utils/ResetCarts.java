@@ -32,7 +32,7 @@ public class ResetCarts {
             userRepository.save(u);
         });
         cartRepository.findAll().forEach(c -> {
-            c.setCartItems(new HashSet<>());
+            c.setCartItemEntities(new HashSet<>());
             c.setPrice(BigDecimal.ZERO);
             cartRepository.save(c);
         });
@@ -40,7 +40,7 @@ public class ResetCarts {
 
         entityManager.joinTransaction();
         entityManager
-                .createQuery("DELETE FROM CartItem")
+                .createQuery("DELETE FROM CartItemEntity")
                 .executeUpdate();
     }
 }

@@ -12,6 +12,7 @@ import com.softuni.mehana.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,13 +61,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDetailsEntity> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null &&
-                authentication.getPrincipal() instanceof UserDetailsEntity userDetails) {
-            return Optional.of(userDetails);
-        }
-        return Optional.empty();
+    public UserEntity getCurrentUser(UserDetails userDetails) {
+        UserEntity user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+        return user;
     }
 
     @Override

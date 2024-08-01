@@ -48,12 +48,11 @@
                             <input class="btn btn-link text-white" type="submit" value="Изход"/>
                         </form>
                     </div>
-<!--                    <a class="nav-link text-white" th:method="get" th:href="@{/user/logout}">Изход</a>-->
                 </li>
 
                 <li class="collapse navbar-collapse justify-content-end text-right" th:if="${#authorization.expression('isAuthenticated()')}">
                         <p class="nav-link text-white" >Здравей,
-                        <th:block th:text="${welcomeMessage}"></th:block>!</p>
+                        <th:block th:text="${#authorization.getAuthentication().getName()}"></th:block>!</p>
                 </li>
 
                 <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">

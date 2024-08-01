@@ -30,6 +30,6 @@ public class OrderEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_item_id")
     )
-    private LinkedHashSet<CartItem> products;
+    private LinkedHashSet<CartItemEntity> products;
 
 }

@@ -18,11 +18,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-
-        if (userDetails instanceof UserDetailsEntity userDetailsEntity) {
-            model.addAttribute("welcomeMessage", userDetailsEntity.getFirstName());
-        }
+    public String home(Model model) {
 
         model.addAttribute("promotions", promoRepository.findAll());
 

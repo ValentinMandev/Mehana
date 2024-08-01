@@ -76,3 +76,18 @@ body {
     margin-bottom: 15px;
 }
 
+#checkout {
+    width: 270px;
+    margin-top: 15px;
+}
+
+#clear-cart {
+    width: 270px;
+    margin-bottom: 15px;
+}
+
+.checkout-buttons {
+    margin-top: 20px;
+}
+
+

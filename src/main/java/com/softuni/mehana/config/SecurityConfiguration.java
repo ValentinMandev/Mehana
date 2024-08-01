@@ -27,7 +27,10 @@ public class SecurityConfiguration {
                                                 "/menu",
                                                 "/",
                                                 "/cart/add",
-                                                "/cart").hasRole(UserRoleEnum.USER.name())
+                                                "/cart",
+                                                "/cart/remove",
+                                                "checkout",
+                                                "finalize-order").hasRole(UserRoleEnum.USER.name())
                                         .anyRequest()
                                         .authenticated()
                 )
