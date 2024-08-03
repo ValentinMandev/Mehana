@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import softuni.orderapi.model.dto.OrderDetailsDto;
 import softuni.orderapi.model.dto.OrderDto;
 import softuni.orderapi.model.dto.StoreOrderDto;
 import softuni.orderapi.service.OrderService;
@@ -59,9 +60,9 @@ public class OrderController {
             }
     )
     @GetMapping("/{user_id}/{id}")
-    public ResponseEntity<OrderDto> getById(@PathVariable("user_id") Long userId, @PathVariable("id") Long id) {
+    public ResponseEntity<OrderDetailsDto> getById(@PathVariable("user_id") Long userId, @PathVariable("id") Long id) {
         return ResponseEntity
-                .ok(orderService.getOrderById(userId, id));
+                .ok(orderService.getOrderDetails(userId, id));
     }
 
 
@@ -93,7 +94,7 @@ public class OrderController {
                     )
             }
     )
-    @GetMapping("/{user_id}/all")
+    @GetMapping("/all/{user_id}")
     public ResponseEntity<List<OrderDto>> getAll(@PathVariable("user_id") Long userId) {
         return ResponseEntity
                 .ok(orderService.getAllOrders(userId));
@@ -109,10 +110,10 @@ public class OrderController {
             )
     )
     @PostMapping
-    public ResponseEntity<OrderDto> storeOrder(
+    public ResponseEntity<OrderDetailsDto> storeOrder(
             @RequestBody StoreOrderDto storeOrderDto
     ) {
-        OrderDto orderDto = orderService.storeOrder(storeOrderDto);
+        OrderDetailsDto orderDto = orderService.storeOrder(storeOrderDto);
         return ResponseEntity.
                 created(
                         ServletUriComponentsBuilder

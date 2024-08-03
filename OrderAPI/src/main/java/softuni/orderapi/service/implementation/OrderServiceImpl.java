@@ -2,6 +2,7 @@ package softuni.orderapi.service.implementation;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import softuni.orderapi.model.dto.OrderDetailsDto;
 import softuni.orderapi.model.dto.OrderDto;
 import softuni.orderapi.model.dto.StoreOrderDto;
 import softuni.orderapi.model.entities.OrderEntity;
@@ -24,14 +25,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getOrderById(Long userId, Long id) {
+    public OrderDetailsDto getOrderDetails(Long userId, Long id) {
         List<OrderEntity> ordersByUser = orderRepository.findAllByUserId(userId);
         try {
             return ordersByUser
                     .stream()
                     .filter(o -> o.getId().equals(id))
                     .findFirst()
-                    .map(o -> map(o))
+                    .map(o -> mapToOrderDetailsDto(o))
                     .get();
 
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return ordersByUser
                     .stream()
-                    .map(o -> map(o))
+                    .map(o -> mapToOrderDto(o))
                     .sorted(Comparator.comparing(OrderDto::getTime, Comparator.reverseOrder()))
                     .toList();
 
@@ -55,14 +56,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto storeOrder(StoreOrderDto storeOrderDto) {
+    public OrderDetailsDto storeOrder(StoreOrderDto storeOrderDto) {
         OrderEntity order = map(storeOrderDto);
         orderRepository.save(order);
-        return map(order);
+        return mapToOrderDetailsDto(order);
     }
 
-    private OrderDto map(OrderEntity orderEntity) {
+    private OrderDto mapToOrderDto(OrderEntity orderEntity) {
         return modelMapper.map(orderEntity, OrderDto.class);
+    }
+
+    private OrderDetailsDto mapToOrderDetailsDto(OrderEntity orderEntity) {
+        return modelMapper.map(orderEntity, OrderDetailsDto.class);
     }
 
     private OrderEntity map(StoreOrderDto storeOrderDto) {

@@ -39,7 +39,7 @@
                     <a class="nav-link text-white" th:method="get" th:href="@{/cart}">Количка</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link text-white" th:method="get" th:href="@{/order-history}">История на поръчките</a>
+                    <a class="nav-link text-white" th:method="get" th:href="@{/orders/all}">История на поръчките</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <div class="form-inline my-lg-0 justify-content-end">

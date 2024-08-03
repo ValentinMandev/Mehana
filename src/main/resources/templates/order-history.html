@@ -11,19 +11,19 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Order ID</th>
             <th>Date</th>
+            <th>Address</th>
             <th>Total</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="order : ${orders}">
-            <td th:text="${order.id}">Order ID</td>
-            <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">Order Date</td>
-            <td th:text="${order.totalPrice}">Total Price</td>
+            <td th:text="${#temporals.format(order.time, 'yyyy-MM-dd HH:mm')}">Order Date</td>
+            <td th:text="${order.address}">Address</td>
+            <td th:text="${order.price}">Total Price</td>
             <td>
-                <a class="btn btn-primary" th:href="@{/order/{id}(id=${order.id})}">View</a>
+                <a class="btn btn-primary" th:href="@{/orders/{id}(id=${order.id})}">View</a>
             </td>
         </tr>
         </tbody>

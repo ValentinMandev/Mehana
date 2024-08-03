@@ -20,10 +20,6 @@ public class OrderDto {
 
     private LocalDateTime time;
 
-    private Set<CartItemEntity> products;
-
-    private String fullName;
-
     private String address;
 
 }

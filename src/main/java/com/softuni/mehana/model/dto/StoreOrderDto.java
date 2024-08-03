@@ -9,13 +9,17 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class OrderDto {
+public class StoreOrderDto {
 
-    private Long id;
+    private Long userId;
 
     private BigDecimal price;
 
     private LocalDateTime time;
+
+    private Set<CartItemDto> products;
+
+    private String fullName;
 
     private String address;
 }
