@@ -1,15 +1,17 @@
 package com.softuni.mehana.service.implementation;
 
+import com.softuni.mehana.model.dto.UpdateProfileDto;
 import com.softuni.mehana.model.dto.UserRegisterDto;
-import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.model.entities.UserInfoEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;
+import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.repository.UserInfoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.repository.UserRoleRepository;
 import com.softuni.mehana.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -80,4 +82,25 @@ public class UserServiceImpl implements UserService {
     public boolean comparePasswords(UserRegisterDto userRegisterDto) {
         return userRegisterDto.getPassword().equals(userRegisterDto.getConfirmPassword());
     }
+
+    @Override
+    public void updateProfile(UpdateProfileDto updateProfileDto, UserDetails userDetails) {
+        UserEntity user = getCurrentUser(userDetails);
+        UserInfoEntity userInfo = user.getUserInfo();
+
+        userInfo.setFirstName(updateProfileDto.getFirstName());
+        userInfo.setLastName(updateProfileDto.getLastName());
+        userInfo.setEmail(updateProfileDto.getEmail());
+        userInfo.setAddress(updateProfileDto.getAddress());
+        userInfo.setPhoneNumber(updateProfileDto.getPhoneNumber());
+
+        userInfoRepository.save(userInfo);
+
+    }
+
+    @Override
+    public UpdateProfileDto getUpdateProfileDto(UserEntity user) {
+        return modelMapper.map(user.getUserInfo(), UpdateProfileDto.class);
+    }
+
 }

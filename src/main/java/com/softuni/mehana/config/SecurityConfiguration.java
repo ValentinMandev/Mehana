@@ -33,7 +33,8 @@ public class SecurityConfiguration {
                                                 "finalize-order",
                                                 "order-history",
                                                 "/orders/all",
-                                                "/orders/{id}").hasRole(UserRoleEnum.USER.name())
+                                                "/orders/{id}",
+                                                "/user/edit-profile").hasRole(UserRoleEnum.USER.name())
                                         .anyRequest()
                                         .authenticated()
                 )

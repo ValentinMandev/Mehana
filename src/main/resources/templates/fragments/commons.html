@@ -33,7 +33,7 @@
                     <a class="nav-link text-white" th:method="get" th:href="@{/menu}">Меню</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link text-white" th:method="get" th:href="@{/profile}">Моят профил</a>
+                    <a class="nav-link text-white" th:method="get" th:href="@{/user/edit-profile}">Моят профил</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link text-white" th:method="get" th:href="@{/cart}">Количка</a>
