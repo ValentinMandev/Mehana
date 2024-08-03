@@ -67,6 +67,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserDetailsEntity> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null &&
+                authentication.getPrincipal() instanceof UserDetailsEntity userDetailsEntity) {
+            return Optional.of(userDetailsEntity);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public boolean comparePasswords(UserRegisterDto userRegisterDto) {
         return userRegisterDto.getPassword().equals(userRegisterDto.getConfirmPassword());
     }

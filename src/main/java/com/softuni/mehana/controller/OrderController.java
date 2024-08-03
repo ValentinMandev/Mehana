@@ -1,10 +1,15 @@
 package com.softuni.mehana.controller;
 
+import com.softuni.mehana.model.dto.CheckoutDto;
+import com.softuni.mehana.model.dto.OrderDto;
+import com.softuni.mehana.model.dto.UserRegisterDto;
 import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.service.CartService;
+import com.softuni.mehana.service.OrderService;
 import com.softuni.mehana.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,10 +24,12 @@ public class OrderController {
 
     UserService userService;
     CartService cartService;
+    OrderService orderService;
 
-    public OrderController(UserService userService, CartService cartService) {
+    public OrderController(UserService userService, CartService cartService, OrderService orderService) {
         this.userService = userService;
         this.cartService = cartService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/checkout")
@@ -44,8 +51,15 @@ public class OrderController {
     }
 
     @PostMapping("/finalize-order")
-    public String checkout(@AuthenticationPrincipal UserDetails userDetails) {
-
+    public String checkout(@Valid CheckoutDto checkoutDto, @AuthenticationPrincipal UserDetails userDetails) {
+        UserEntity user = userService.getCurrentUser(userDetails);
+        orderService.storeOrder(user, checkoutDto);
         return "order-successful";
     }
+
+    @GetMapping("/order-history")
+    public String getOrderHistory() {
+        return "/order-history";
+    }
+
 }

@@ -25,7 +25,6 @@ public class ResetCarts {
     }
 
     @Transactional
-    @Scheduled(cron = "0 49 15 * * *", zone = "GMT+3")
     public void reset() {
         userRepository.findAll().forEach(u -> {
             u.setCart(null);

@@ -25,6 +25,12 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+/OrderAPI/.idea
+/OrderAPI/.gradle
+/OrderAPI/.gitignore
+/OrderAPI/build
+/OrderAPI/HELP.md
+
 
 ### NetBeans ###
 /nbproject/private/

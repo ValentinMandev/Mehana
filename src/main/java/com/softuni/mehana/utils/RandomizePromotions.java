@@ -18,14 +18,17 @@ public class RandomizePromotions {
     private final ProductRepository productRepository;
     private final PromoRepository promoRepository;
     private final Random random = new Random();
+    private final ResetCarts resetCarts;
 
-    public RandomizePromotions(ProductRepository productRepository, PromoRepository promoRepository) {
+    public RandomizePromotions(ProductRepository productRepository, PromoRepository promoRepository, ResetCarts resetCarts) {
         this.productRepository = productRepository;
         this.promoRepository = promoRepository;
+        this.resetCarts = resetCarts;
     }
 
     @Scheduled(cron = "0 50 15 * * *", zone = "GMT+3")
     public void definePromotions() {
+        resetCarts.reset();
         clearPromotions();
 
         setPromotion(ProductTypeEnum.STARTERS);

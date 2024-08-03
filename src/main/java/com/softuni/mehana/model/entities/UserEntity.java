@@ -47,11 +47,4 @@ public class UserEntity extends BaseEntity {
     @OneToOne
     private CartEntity cart;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "users_orders",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
-    private List<OrderEntity> orders;
 }

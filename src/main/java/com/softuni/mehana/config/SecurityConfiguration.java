@@ -30,7 +30,8 @@ public class SecurityConfiguration {
                                                 "/cart",
                                                 "/cart/remove",
                                                 "checkout",
-                                                "finalize-order").hasRole(UserRoleEnum.USER.name())
+                                                "finalize-order",
+                                                "order-history").hasRole(UserRoleEnum.USER.name())
                                         .anyRequest()
                                         .authenticated()
                 )
