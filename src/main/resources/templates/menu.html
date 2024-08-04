@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
     <title>Menu - My Restaurant</title>
@@ -55,7 +57,7 @@
     <div class="tab-content" id="menuTabsContent">
         <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
             <div class="row mt-4">
-                <div class="col-md-4" th:each="p: ${starters}">
+                <div class="col-md-4" th:each="p: ${starters}" th:if="${p.isEnabled()}">
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
@@ -73,7 +75,15 @@
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
                                     <button class="btn btn-primary ml-2">Добави в количката</button>
                                 </div>
+
                             </form>
+                            <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                    <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <input type="hidden" name="_method" value="disable" />
+                                    <button type="submit" id="disable1" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +92,7 @@
 
         <div class="tab-pane fade" id="soups" role="tabpanel" aria-labelledby="soups-tab">
             <div class="row mt-4">
-                <div class="col-md-4" th:each="p: ${soups}">
+                <div class="col-md-4" th:each="p: ${soups}" th:if="${p.isEnabled()}">
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
@@ -97,7 +107,15 @@
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
                                     <button class="btn btn-primary ml-2">Добави в количката</button>
                                 </div>
+
                             </form>
+                            <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                    <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <input type="hidden" name="_method" value="disable" />
+                                    <button type="submit" id="disable2" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +124,7 @@
 
         <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-courses-tab">
             <div class="row mt-4">
-                <div class="col-md-4" th:each="p: ${main}">
+                <div class="col-md-4" th:each="p: ${main}" th:if="${p.isEnabled()}">
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
@@ -124,7 +142,15 @@
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
                                     <button class="btn btn-primary ml-2">Добави в количката</button>
                                 </div>
+
                             </form>
+                            <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                    <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <input type="hidden" name="_method" value="disable" />
+                                    <button type="submit" id="disable3" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +159,7 @@
 
         <div class="tab-pane fade" id="bread" role="tabpanel" aria-labelledby="bread-tab">
             <div class="row mt-4">
-                <div class="col-md-4" th:each="p: ${bread}">
+                <div class="col-md-4" th:each="p: ${bread}" th:if="${p.isEnabled()}">
                     <div class="card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
@@ -148,7 +174,15 @@
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
                                     <button class="btn btn-primary ml-2">Добави в количката</button>
                                 </div>
+
                             </form>
+                            <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                    <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <input type="hidden" name="_method" value="disable" />
+                                    <button type="submit" id="disable4" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,7 +191,7 @@
 
         <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
             <div class="row mt-4">
-                <div class="col-md-4" th:each="p: ${desserts}">
+                <div class="col-md-4" th:each="p: ${desserts}" th:if="${p.isEnabled()}">
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
@@ -176,6 +210,14 @@
                                     <button class="btn btn-primary ml-2">Добави в количката</button>
                                 </div>
                             </form>
+                            <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
+
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                    <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <input type="hidden" name="_method" value="disable" />
+                                    <button type="submit" id="disable5" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

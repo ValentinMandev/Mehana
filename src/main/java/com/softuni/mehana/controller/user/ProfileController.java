@@ -40,7 +40,7 @@ public class ProfileController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("updateProfileDto", updateProfileDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDto", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateProfileDto", bindingResult);
             return "profile";
         }
 

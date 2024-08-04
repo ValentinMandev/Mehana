@@ -38,6 +38,7 @@ public class RandomizePromotions {
 
     public void setPromotion(ProductTypeEnum productType) {
         List<ProductEntity> products = productRepository.findAllByType(productType);
+        products = products.stream().filter(ProductEntity::isEnabled).toList();
         ProductEntity product = products.get(random.nextInt(products.size()));
         product.setOnPromotion(true);
         product.setPromoPrice(product.getPrice().multiply(BigDecimal.valueOf(0.8)));

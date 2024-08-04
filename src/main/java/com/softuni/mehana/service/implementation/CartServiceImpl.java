@@ -41,6 +41,11 @@ public class CartServiceImpl implements CartService {
         }
 
         ProductEntity product = productRepository.findById(productId).orElse(null);
+
+        if (product == null || !product.isEnabled()) {
+            return;
+        }
+
         CartItemEntity cartItemEntity;
 
         List<CartItemEntity> existing = cart.getCartItemEntities().stream().filter(i -> i.getProduct().getId().equals(product.getId())).toList();
