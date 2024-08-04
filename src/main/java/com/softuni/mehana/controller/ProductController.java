@@ -1,5 +1,6 @@
 package com.softuni.mehana.controller;
 
+import com.softuni.mehana.model.dto.AddProductDto;
 import com.softuni.mehana.model.dto.UpdateProductDto;
 import com.softuni.mehana.model.dto.UpdateProfileDto;
 import com.softuni.mehana.model.entities.ProductEntity;
@@ -32,6 +33,7 @@ public class ProductController {
         updateProductDto.setId(product.getId());
         updateProductDto.setName(product.getName());
         updateProductDto.setNameEng(product.getNameEng());
+        updateProductDto.setType(product.getType());
         updateProductDto.setPrice(product.getPrice());
         updateProductDto.setImageUrl(product.getImageUrl());
 
@@ -62,6 +64,28 @@ public class ProductController {
     public String disableProduct(@PathVariable("id") Long id) {
         ProductEntity product = productRepository.findById(id).orElse(null);
         productService.disableProduct(product);
+        return "redirect:/menu";
+    }
+
+    @GetMapping("/add-product")
+    public String addProduct(Model model) {
+        model.addAttribute("addProductDto", new AddProductDto());
+        return "/admin/add-product";
+    }
+
+    @PostMapping("/add-product")
+    public String addProduct(@Valid AddProductDto addProductDto,
+                             BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addProductDto", addProductDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addProductDto", bindingResult);
+            return "admin/add-product";
+        }
+
+        productService.addProduct(addProductDto);
+
         return "redirect:/menu";
     }
 }

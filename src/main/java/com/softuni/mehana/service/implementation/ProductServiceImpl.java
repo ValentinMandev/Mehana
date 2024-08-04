@@ -1,5 +1,6 @@
 package com.softuni.mehana.service.implementation;
 
+import com.softuni.mehana.model.dto.AddProductDto;
 import com.softuni.mehana.model.dto.UpdateProductDto;
 import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
@@ -12,6 +13,7 @@ import com.softuni.mehana.repository.PromoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.service.ProductService;
 import com.softuni.mehana.utils.RandomizePromotions;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,13 +27,15 @@ public class ProductServiceImpl implements ProductService {
     private final UserRepository userRepository;
     private final RandomizePromotions randomizePromotions;
     private final PromoRepository promoRepository;
+    private final ModelMapper modelMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository, CartRepository cartRepository, UserRepository userRepository, RandomizePromotions randomizePromotions, PromoRepository promoRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CartRepository cartRepository, UserRepository userRepository, RandomizePromotions randomizePromotions, PromoRepository promoRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.randomizePromotions = randomizePromotions;
         this.promoRepository = promoRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -43,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(UpdateProductDto updateProductDto, ProductEntity product) {
         product.setName(updateProductDto.getName());
         product.setNameEng(updateProductDto.getNameEng());
+        product.setType(updateProductDto.getType());
         product.setPrice(updateProductDto.getPrice());
         if (product.isOnPromotion()) {
             product.setPromoPrice(updateProductDto.getPrice().multiply(BigDecimal.valueOf(0.8)));
@@ -64,6 +69,15 @@ public class ProductServiceImpl implements ProductService {
             PromoEntity promo = promotions.stream().filter(p -> p.getProduct().getId().equals(product.getId())).findFirst().orElse(null);
             promoRepository.delete(promo);
         }
+        productRepository.save(product);
+    }
+
+    @Override
+    public void addProduct(AddProductDto addProductDto) {
+        ProductEntity product = modelMapper.map(addProductDto, ProductEntity.class);
+        product.setOnPromotion(false);
+        product.setEnabled(true);
+        product.setPromoPrice(addProductDto.getPrice().multiply(BigDecimal.valueOf(0.8)));
         productRepository.save(product);
     }
 

@@ -1,6 +1,9 @@
 package com.softuni.mehana.model.dto;
 
 import com.softuni.mehana.model.enums.ProductTypeEnum;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,18 +11,16 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class UpdateProductDto {
-
-    private Long id;
+public class AddProductDto {
 
     private String name;
 
-    private String nameEng;
-
     private ProductTypeEnum type;
 
-    private BigDecimal price;
+    private String nameEng;
 
     private String imageUrl;
+
+    private BigDecimal price;
 
 }

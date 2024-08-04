@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Product - Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
-<nav th:replace="fragments/commons :: navbar"></nav>
-<div class="container mt-4">
+<nav th:replace="~{fragments/commons :: navbar}"></nav>
+<div class="container mt-4 col-md-4">
     <h1>Add Product</h1>
-    <form th:action="@{/admin/products/add}" th:object="${product}" method="post">
+    <form th:action="@{/add-product}" th:object="${addProductDto}" th:method="post">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}">
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+            <label for="nameEng">Name - english</label>
+            <input type="text" class="form-control" id="nameEng" th:field="*{nameEng}">
         </div>
+        <div class="form-group">
+            <div>
+                <label th:for="type">Type</label>
+            </div>
+            <select th:field="*{type}" class="browser-default custom-select" id="type" th:name="${type}">
+                <option th:each="t: ${T(com.softuni.mehana.model.enums.ProductTypeEnum).values()}"
+                        th:value="${t}"
+                        th:text="${t}">
+                </option>
+            </select>
+        </div>
+
+
         <div class="form-group">
             <label for="price">Price</label>
             <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}">
         </div>
         <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" id="category" th:field="*{category}">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}">
         </div>
         <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
