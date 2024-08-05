@@ -2,21 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
-    <title>Contact Us - My Restaurant</title>
+    <title>Контакти</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
-<div class="container mt-12" style="width: 1200px">
+<div class="container mt-12 about-container" style="width: 800px">
     <div class="row main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <h2>Get in Touch</h2>
-        <p><strong>Address:</strong> 123 Main Street, Anytown, USA</p>
-        <p><strong>Phone:</strong> (123) 456-7890</p>
-        <p><strong>Email:</strong> contact@myrestaurant.com</p>
+        <h1 class="text-center">За връзка с нас</h1>
+        <p></p>
+        <p><strong>Адрес:</strong> гр. София, жк. Младост 1, до пазара</p>
+        <p><strong>Телефон:</strong> +359 888 123 123</p>
+        <p><strong>Email:</strong> mehana@nazdrave.com</p>
+        <p></p>
     </div>
     <div class="row main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <h3>Find Us</h3>
+        <h2 class="text-center">Как да ни откриете</h2>
+        <p></p>
         <div class="embed-responsive embed-responsive-16by9">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d211.89527638545576!2d23.3734603726445!3d42.651824417729145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sbg!2sbg!4v1722029968754!5m2!1sbg!2sbg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>

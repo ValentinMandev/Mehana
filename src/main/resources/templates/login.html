@@ -2,32 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
-    <title>Login - Restaurant</title>
+    <title>Вход</title>
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 
 <div class="container mt-lg-5" style="width: 300px">
-    <h1>Login</h1>
+    <h1 class="text-center">Вход</h1>
 
     <div th:if="${param.error}" class="alert-danger danger" id="login-error">
-        Invalid username or password.
+        Невалидно потребителско име или парола
     </div>
 
-    <form th:action="@{/user/login}" th:method="post" >
+    <form th:action="@{/user/login}" th:method="post" class="login-form">
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Потребителско име</label>
             <input type="text" class="form-control" id="username" name="username" >
 
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Парола</label>
             <input type="password" class="form-control" id="password" name="password">
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Вход</button>
     </form>
 
 </div>

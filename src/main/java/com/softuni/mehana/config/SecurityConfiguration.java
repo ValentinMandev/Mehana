@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                                                 "/user/edit-profile").hasRole(UserRoleEnum.USER.name())
                                         .requestMatchers("/edit-product/{id}",
                                                 "/disable-product/{id}",
-                                                "/add-product/{id}"
+                                                "/add-product"
                                                 ).hasRole(UserRoleEnum.ADMIN.name())
                                         .anyRequest()
                                         .authenticated()

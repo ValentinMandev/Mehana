@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/commons::head}">
     <meta charset="UTF-8">
-    <title>Menu - My Restaurant</title>
+    <title>Меню</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <style>
@@ -35,9 +35,9 @@
 
 <div class="container menu-section">
     <h1 class="text-center">Нашето меню</h1>
-    <h5 class="text-center">Вкусни български гозби</h5>
+    <h5 class="text-center">Поглезете се с нашите вкусни български гозби</h5>
 
-    <div class="text-center">
+    <div class="text-center add-product-button" sec:authorize="hasRole('ADMIN')">
         <a th:href="@{/add-product}" th:method="get" class="btn-primary btn">Добавяне на ястие</a>
     </div>
 
@@ -83,7 +83,8 @@
 
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center"
+                                      onsubmit="return confirm('Сигурни ли сте, че искате да премахнете този продукт?') ? true : false;">
                                     <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <input type="hidden" name="_method" value="disable" />
                                     <button type="submit" id="disable1" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
@@ -115,7 +116,8 @@
 
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center"
+                                      onsubmit="return confirm('Сигурни ли сте, че искате да премахнете този продукт?') ? true : false;">
                                     <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <input type="hidden" name="_method" value="disable" />
                                     <button type="submit" id="disable2" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
@@ -150,7 +152,8 @@
 
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center"
+                                      onsubmit="return confirm('Сигурни ли сте, че искате да премахнете този продукт?') ? true : false;">
                                     <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <input type="hidden" name="_method" value="disable" />
                                     <button type="submit" id="disable3" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
@@ -182,7 +185,8 @@
 
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center"
+                                      onsubmit="return confirm('Сигурни ли сте, че искате да премахнете този продукт?') ? true : false;">
                                     <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <input type="hidden" name="_method" value="disable" />
                                     <button type="submit" id="disable4" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
@@ -217,7 +221,8 @@
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
 
-                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center">
+                                <form th:action="@{/disable-product/{id} (id=${p.id})}" th:method="post" class="text-center"
+                                      onsubmit="return confirm('Сигурни ли сте, че искате да премахнете този продукт?') ? true : false;">
                                     <a th:href="@{/edit-product/{id} (id=${p.id})}" th:method="get" class="admin-button btn-primary btn"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <input type="hidden" name="_method" value="disable" />
                                     <button type="submit" id="disable5" class="btn-danger btn"><i class="fa-solid fa-trash"></i></button>
