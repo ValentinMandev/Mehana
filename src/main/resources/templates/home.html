@@ -1,33 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/commons::head}">
+<head>
     <meta charset="UTF-8">
-    <title>Home - My Restaurant</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <style>
-        .hero-section {
-            color: white;
-            padding: 150px 0;
-            text-align: center;
-        }
-        .featured-dishes img {
-            width: 100%;
-            height: auto;
-        }
-        .testimonial {
-            background: #f8f9fa;
-            padding: 40px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .newsletter {
-            background: #343a40;
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+    <title>Механа "Наздраве"</title>
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>

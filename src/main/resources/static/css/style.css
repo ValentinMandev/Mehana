@@ -79,6 +79,7 @@ body {
 #checkout {
     width: 270px;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #clear-cart {
@@ -88,6 +89,7 @@ body {
 
 .checkout-buttons {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .admin-actions {
@@ -171,3 +173,13 @@ body {
 .add-product-form {
     margin-top: 25px;
 }
+
+#order-history-btn {
+    margin-bottom: 15px;
+}
+
+.order-history-table {
+    margin-top: 25px;
+}
+
+
