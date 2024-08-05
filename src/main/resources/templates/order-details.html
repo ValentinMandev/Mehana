@@ -5,24 +5,24 @@
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <div class="container order-details">
-    <h1 class="text-center">Order Details</h1>
+    <h1 class="text-center">Детайли за поръчка</h1>
 
     <div class="client-details">
-        <h3>Client Information</h3>
-        <p><strong>Name:</strong> <span th:text="${order.fullName}"></span></p>
-        <p><strong>Address:</strong> <span th:text="${order.address}"></span></p>
-        <p><strong>Order Time:</strong> <span th:text="${#temporals.format(order.time, 'yyyy-MM-dd HH:mm')}"></span></p>
+        <h3>Информация за клиента</h3>
+        <p><strong>Име:</strong> <span th:text="${order.fullName}"></span></p>
+        <p><strong>Адрес:</strong> <span th:text="${order.address}"></span></p>
+        <p><strong>Час и дата на поръчката:</strong> <span th:text="${#temporals.format(order.time, 'dd.MM.yyyy HH:mm')}"></span></p>
     </div>
 
     <div class="order-summary">
-        <h3>Order Summary</h3>
+        <h3>Поръчка</h3>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Meal</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th>Продукт</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Цена - общо</th>
             </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="3" class="text-right">Total Price</th>
+                <th colspan="3" class="text-right">Крайна цена</th>
                 <th th:text="${order.price}"></th>
             </tr>
             </tfoot>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="text-center">
-        <a class="btn btn-primary" th:href="@{/orders/all}">Back to Order History</a>
+        <a class="btn btn-primary" th:href="@{/orders/all}">Обратно към история на поръчките</a>
     </div>
 </div>
 

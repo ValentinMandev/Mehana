@@ -3,13 +3,13 @@
 <head th:replace="~{fragments/commons::head}">
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
-<div class="error-container text-center">
-    <h3 class="error-message">Поръчката е успешна!</h3>
-    <img src="/images/delivery.jpg" alt="Order successful image" class="funny-image" width="450px">
-    <h4 class="error-description">
+<div class="text-center">
+    <h3 class="order-message">Поръчката е успешна!</h3>
+    <img src="/images/delivery.jpg" alt="Order successful image" class="funny-image order-image" width="450px">
+    <h4 class="order-description">
         Храната ти ще пристигне максимално бързо - вкусна и топла!
     </h4>
-    <a th:href="@{/orders/all}" class="btn btn-primary home-button">История на поръчките</a>
+    <a th:href="@{/orders/all}" class="btn btn-primary home-button order-hist-btn">История на поръчките</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

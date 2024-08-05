@@ -5,12 +5,11 @@
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 <div class="error-container text-center">
 <!--    <h1 class="error-code">404</h1>-->
-    <h3 class="error-message">Oops! Something went wrong.</h3>
-    <img src="/images/fail.png" alt="Funny error image" class="funny-image" width="450px">
-    <h4 class="error-description">
-        It seems we've hit a bump in the road. But don't worry, we've sent our best chefs to fix it!
-    </h4>
-    <a href="/" class="btn btn-primary home-button">Go Home</a>
+    <h3 class="error-message">Опааа... Нещо се обърка!</h3>
+    <img src="/images/fail.png" alt="Funny error image" class="funny-image error-image" width="450px">
+    <div>
+        <a href="/" class="btn btn-primary home-button error-btn">Към главната страница</a>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

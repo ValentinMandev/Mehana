@@ -15,7 +15,7 @@ body {
 }
 
 .menu-section {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .card img {
     height: 200px;
@@ -124,4 +124,50 @@ body {
     margin-top: 20px;
 }
 
+.checkout-price {
+    font-size: 30px;
+}
 
+.order-summary {
+    margin-top: 25px;
+}
+
+.checkout-table {
+    margin-top: 25px;
+}
+
+.order-description {
+    margin-top: 40px;
+}
+
+.order-message {
+    margin-top: 40px;
+}
+
+.order-image {
+    margin-top: 30px;
+}
+
+.order-hist-btn {
+    margin-top: 15px;
+}
+
+.error-message {
+    margin-top: 40px;
+}
+
+.error-image {
+    margin-top: 20px;
+}
+
+.error-btn {
+    margin-top: 25px;
+}
+
+.update-product-form {
+    margin-top: 25px;
+}
+
+.add-product-form {
+    margin-top: 25px;
+}

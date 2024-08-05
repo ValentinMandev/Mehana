@@ -5,16 +5,16 @@
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <div class="container order-summary">
-    <h1 class="text-center">Finalize Your Order</h1>
+    <h1 class="text-center">Завършване на поръчката</h1>
 
-    <div class="table-responsive">
+    <div class="table-responsive checkout-table">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Meal</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th>Продукт</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Цена - общо</th>
             </tr>
             </thead>
             <tbody>
@@ -26,34 +26,34 @@
             </tr>
             </tbody>
             <tfoot>
-            <tr>
-                <th colspan="3" class="text-right">Total</th>
-                <th th:text="${price}">Total Price</th>
+            <tr class="checkout-price">
+                <th colspan="3" class="text-right">Крайна цена</th>
+                <th th:text="${price}"></th>
             </tr>
             </tfoot>
         </table>
     </div>
 
     <div class="form-section">
-        <h3>Shipping Information</h3>
+        <h3>Информация за доставка</h3>
         <form th:action="@{/finalize-order}" th:method="post" th:object="${userInfo}">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName">Име</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" th:value="*{firstName}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
+                    <label for="lastName">Фамилия</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" th:value="*{lastName}" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Телефон</label>
                     <input type="text" class="form-control" id="phone" name="phone" th:value="*{phoneNumber}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="address">Address</label>
+                    <label for="address">Адрес</label>
                     <input type="text" class="form-control" id="address" name="address" th:value="*{address}" required>
                 </div>
             </div>

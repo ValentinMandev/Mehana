@@ -4,15 +4,15 @@
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 <div class="container mt-4">
-    <h1>Shopping Cart</h1>
+    <h1>Количка</h1>
     <table class="table">
         <thead>
         <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th class="text-right">Actions&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>Продукт</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Цена - общо</th>
+            <th class="text-right">Действия&nbsp;&nbsp;</th>
         </tr>
         </thead>
         <tbody th:if="${price > 0}">
@@ -35,7 +35,7 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit" id="clear-cart" class="btn-danger btn">Изпразни количката</button>
         </form>
-        <h3>Total: <span th:text="${price}">Total Price</span></h3>
+        <h3>Крайна цена: <span th:text="${price}"></span> лв.</h3>
         <a type="submit" id="checkout" class="btn btn-success"
                 th:href="@{/checkout}" th:method="get" th:if="${price > 0}">Към завършване на поръчката</a>
     </div>
