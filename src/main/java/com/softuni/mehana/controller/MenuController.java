@@ -18,11 +18,11 @@ public class MenuController {
     @GetMapping("/menu")
     public String menu(Model model) {
 
-        model.addAttribute("starters", productService.getAll(ProductTypeEnum.STARTERS));
-        model.addAttribute("soups", productService.getAll(ProductTypeEnum.SOUPS));
-        model.addAttribute("main", productService.getAll(ProductTypeEnum.MAIN_COURSES));
-        model.addAttribute("desserts", productService.getAll(ProductTypeEnum.DESSERTS));
-        model.addAttribute("bread", productService.getAll(ProductTypeEnum.BREAD));
+        model.addAttribute("starters", productService.getAllByType(ProductTypeEnum.STARTERS));
+        model.addAttribute("soups", productService.getAllByType(ProductTypeEnum.SOUPS));
+        model.addAttribute("main", productService.getAllByType(ProductTypeEnum.MAIN_COURSES));
+        model.addAttribute("desserts", productService.getAllByType(ProductTypeEnum.DESSERTS));
+        model.addAttribute("bread", productService.getAllByType(ProductTypeEnum.BREAD));
 
         return "menu";
     }

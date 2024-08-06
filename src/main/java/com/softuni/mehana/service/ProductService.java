@@ -9,11 +9,15 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<ProductEntity> getAll(ProductTypeEnum productTypeEnum);
+    List<ProductEntity> getAllByType(ProductTypeEnum productTypeEnum);
 
-    void updateProduct(UpdateProductDto updateProductDto, ProductEntity product);
+    void updateProduct(UpdateProductDto updateProductDto, Long id);
 
-    void disableProduct(ProductEntity product);
+    void disableProduct(Long id);
 
     void addProduct(AddProductDto addProductDto);
+
+    ProductEntity getProductById(Long id);
+
+    UpdateProductDto updateProductDtoBuilder(Long id);
 }

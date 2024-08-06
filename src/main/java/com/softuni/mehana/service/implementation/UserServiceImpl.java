@@ -10,6 +10,7 @@ import com.softuni.mehana.repository.UserInfoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.repository.UserRoleRepository;
 import com.softuni.mehana.service.UserService;
+import com.softuni.mehana.service.exception.UserNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -64,12 +65,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getCurrentUser(UserDetails userDetails) {
-        UserEntity user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
-        return user;
+        Optional<UserEntity> user = userRepository.findByUsername(userDetails.getUsername());
+
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("User " + userDetails.getUsername() + " not found");
+        }
+
+        return user.get();
     }
 
     @Override
-    public Optional<UserDetailsEntity> getCurrentUser() {
+    public Optional<UserDetailsEntity> getCurrentUserDetailsEntity() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null &&
                 authentication.getPrincipal() instanceof UserDetailsEntity userDetailsEntity) {

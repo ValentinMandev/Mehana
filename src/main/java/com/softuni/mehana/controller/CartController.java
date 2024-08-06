@@ -24,6 +24,7 @@ public class CartController {
     @GetMapping("/cart")
     public String getCart(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         CartEntity cart = cartService.getCart(userDetails);
+
         Set<CartItemEntity> cartItemEntities = cartService.getCartItems(cart);
 
         model.addAttribute("price", cart.getPrice());

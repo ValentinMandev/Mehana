@@ -12,12 +12,15 @@ import com.softuni.mehana.repository.ProductRepository;
 import com.softuni.mehana.repository.PromoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.service.ProductService;
+import com.softuni.mehana.service.exception.ProductNotFoundException;
+import com.softuni.mehana.service.exception.ProductsOfTypeNotFoundException;
 import com.softuni.mehana.utils.RandomizePromotions;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,12 +42,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductEntity> getAll(ProductTypeEnum productTypeEnum) {
-        return productRepository.findAllByType(productTypeEnum);
+    public List<ProductEntity> getAllByType(ProductTypeEnum productTypeEnum) {
+        List<ProductEntity> products = productRepository.findAllByType(productTypeEnum);
+
+        if (products.isEmpty()) {
+            throw new ProductsOfTypeNotFoundException("Products of type " + productTypeEnum.name() + " not found!");
+        }
+
+        return products;
     }
 
     @Override
-    public void updateProduct(UpdateProductDto updateProductDto, ProductEntity product) {
+    public void updateProduct(UpdateProductDto updateProductDto, Long id) {
+        ProductEntity product = getProductById(id);
         product.setName(updateProductDto.getName());
         product.setNameEng(updateProductDto.getNameEng());
         product.setType(updateProductDto.getType());
@@ -59,7 +69,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void disableProduct(ProductEntity product) {
+    public void disableProduct(Long id) {
+        ProductEntity product = getProductById(id);
         product.setEnabled(false);
         removeFromCarts(product);
         if (product.isOnPromotion()) {
@@ -79,6 +90,32 @@ public class ProductServiceImpl implements ProductService {
         product.setEnabled(true);
         product.setPromoPrice(addProductDto.getPrice().multiply(BigDecimal.valueOf(0.8)));
         productRepository.save(product);
+    }
+
+    @Override
+    public ProductEntity getProductById(Long id) {
+        Optional<ProductEntity> product = productRepository.findById(id);
+
+        if (product.isEmpty()) {
+            throw new ProductNotFoundException("Product with id " + id + " not found!");
+        }
+
+        return product.get();
+    }
+
+    @Override
+    public UpdateProductDto updateProductDtoBuilder(Long id) {
+        UpdateProductDto updateProductDto = new UpdateProductDto();
+        ProductEntity product = getProductById(id);
+
+        updateProductDto.setId(product.getId());
+        updateProductDto.setName(product.getName());
+        updateProductDto.setNameEng(product.getNameEng());
+        updateProductDto.setType(product.getType());
+        updateProductDto.setPrice(product.getPrice());
+        updateProductDto.setImageUrl(product.getImageUrl());
+
+        return updateProductDto;
     }
 
     private void removeFromCarts(ProductEntity product) {

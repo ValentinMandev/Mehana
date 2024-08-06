@@ -1,9 +1,6 @@
 package com.softuni.mehana.controller;
 
-import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.repository.PromoRepository;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

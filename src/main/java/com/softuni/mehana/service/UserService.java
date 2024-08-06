@@ -15,7 +15,7 @@ public interface UserService {
 
     UserEntity getCurrentUser(UserDetails userDetails);
 
-    Optional<UserDetailsEntity> getCurrentUser();
+    Optional<UserDetailsEntity> getCurrentUserDetailsEntity();
 
     boolean comparePasswords(UserRegisterDto userRegisterDto);
 

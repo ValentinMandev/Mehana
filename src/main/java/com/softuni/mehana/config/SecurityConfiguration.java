@@ -21,21 +21,29 @@ public class SecurityConfiguration {
                         authorizeRequests ->
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                        .requestMatchers("/", "/about", "/contact", "/gallery", "menu",
-                                                "/user/login", "/user/register", "/error").permitAll()
-                                        .requestMatchers("/menu/**",
+
+                                        .requestMatchers("/",
+                                                "/about",
+                                                "/contact",
+                                                "/gallery",
                                                 "/menu",
-                                                "/",
-                                                "/cart/add",
+                                                "/user/login",
+                                                "/user/register",
+                                                "/error").permitAll()
+
+                                        .requestMatchers(
                                                 "/cart",
+                                                "/cart/add",
                                                 "/cart/remove",
-                                                "checkout",
-                                                "finalize-order",
-                                                "order-history",
+                                                "/checkout",
+                                                "/finalize-order",
+                                                "/order-history",
                                                 "/orders/all",
                                                 "/orders/{id}",
                                                 "/user/edit-profile").hasRole(UserRoleEnum.USER.name())
-                                        .requestMatchers("/edit-product/{id}",
+
+                                        .requestMatchers(
+                                                "/edit-product/{id}",
                                                 "/disable-product/{id}",
                                                 "/add-product"
                                                 ).hasRole(UserRoleEnum.ADMIN.name())

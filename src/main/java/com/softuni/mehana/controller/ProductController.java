@@ -2,41 +2,29 @@ package com.softuni.mehana.controller;
 
 import com.softuni.mehana.model.dto.AddProductDto;
 import com.softuni.mehana.model.dto.UpdateProductDto;
-import com.softuni.mehana.model.dto.UpdateProfileDto;
 import com.softuni.mehana.model.entities.ProductEntity;
-import com.softuni.mehana.model.enums.ProductTypeEnum;
-import com.softuni.mehana.repository.ProductRepository;
 import com.softuni.mehana.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductController {
 
-    ProductRepository productRepository;
-    ProductService productService;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository productRepository, ProductService productService) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/edit-product/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
-        UpdateProductDto updateProductDto = new UpdateProductDto();
-        ProductEntity product = productRepository.findById(id).orElse(null);
-
-        updateProductDto.setId(product.getId());
-        updateProductDto.setName(product.getName());
-        updateProductDto.setNameEng(product.getNameEng());
-        updateProductDto.setType(product.getType());
-        updateProductDto.setPrice(product.getPrice());
-        updateProductDto.setImageUrl(product.getImageUrl());
-
+        UpdateProductDto updateProductDto = productService.updateProductDtoBuilder(id);
         model.addAttribute("updateProductDto", updateProductDto);
         return "admin/edit-product";
     }
@@ -53,17 +41,13 @@ public class ProductController {
             return "admin/edit-product";
         }
 
-        ProductEntity product = productRepository.findById(id).orElse(null);
-
-        productService.updateProduct(updateProductDto, product);
-
+        productService.updateProduct(updateProductDto, id);
         return "redirect:/menu";
     }
 
     @PostMapping("/disable-product/{id}")
     public String disableProduct(@PathVariable("id") Long id) {
-        ProductEntity product = productRepository.findById(id).orElse(null);
-        productService.disableProduct(product);
+        productService.disableProduct(id);
         return "redirect:/menu";
     }
 

@@ -3,7 +3,6 @@ package com.softuni.mehana.controller;
 import com.softuni.mehana.model.dto.CheckoutDto;
 import com.softuni.mehana.model.dto.OrderDetailsDto;
 import com.softuni.mehana.model.dto.OrderDto;
-import com.softuni.mehana.model.dto.StoreOrderDto;
 import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.UserEntity;
@@ -15,11 +14,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Set;
@@ -57,9 +54,7 @@ public class OrderController {
 
     @PostMapping("/finalize-order")
     public String checkout(@Valid CheckoutDto checkoutDto, @AuthenticationPrincipal UserDetails userDetails) {
-
-        UserEntity user = userService.getCurrentUser(userDetails);
-        orderService.storeOrder(user, checkoutDto);
+        orderService.storeOrder(userDetails, checkoutDto);
         return "order-successful";
     }
 
@@ -73,7 +68,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public String getOrderDetails(@PathVariable("id") Long orderId, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String getOrderDetails(@PathVariable("id") Long orderId,
+                                  @AuthenticationPrincipal UserDetails userDetails,
+                                  Model model) {
         UserEntity user = userService.getCurrentUser(userDetails);
         OrderDetailsDto order = orderService.getOrderDetails(user.getId(), orderId);
 

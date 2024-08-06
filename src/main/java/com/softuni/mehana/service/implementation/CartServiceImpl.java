@@ -5,53 +5,54 @@ import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.ProductEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.repository.CartRepository;
-import com.softuni.mehana.repository.ProductRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.service.CartService;
+import com.softuni.mehana.service.ProductService;
+import com.softuni.mehana.service.UserService;
+import com.softuni.mehana.service.exception.CartItemEntityNotFoundException;
+import com.softuni.mehana.service.exception.NullCartItemEntitiesException;
+import com.softuni.mehana.service.exception.ProductDisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CartServiceImpl implements CartService {
 
-    ProductRepository productRepository;
-    UserRepository userRepository;
-    CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final UserService userService;
+    private final ProductService productService;
 
-    public CartServiceImpl(ProductRepository productRepository, UserRepository userRepository, CartRepository cartRepository) {
-        this.productRepository = productRepository;
+    public CartServiceImpl(UserRepository userRepository,
+                           CartRepository cartRepository, UserService userService, ProductService productService) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
+        this.userService = userService;
+        this.productService = productService;
     }
 
     @Override
     public void addToCart(Long productId, int quantity, UserDetails userDetails) {
 
-        UserEntity user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+        UserEntity user = userService.getCurrentUser(userDetails);
 
-        CartEntity cart = user.getCart();
+        CartEntity cart = getCart(userDetails);
 
-        if (cart == null) {
-            cart = new CartEntity();
-        }
+        ProductEntity product = productService.getProductById(productId);
 
-        ProductEntity product = productRepository.findById(productId).orElse(null);
-
-        if (product == null || !product.isEnabled()) {
-            return;
+        if (!product.isEnabled()) {
+            throw new ProductDisabledException("Product with id " + productId + " is disabled!");
         }
 
         CartItemEntity cartItemEntity;
 
-        List<CartItemEntity> existing = cart.getCartItemEntities().stream().filter(i -> i.getProduct().getId().equals(product.getId())).toList();
+        Optional<CartItemEntity> entity = getCartItems(cart).stream().filter(i -> i.getProduct().getId().equals(product.getId())).findFirst();
 
-        if (!existing.isEmpty()) {
-            cartItemEntity = existing.get(0);
+        if (entity.isPresent()) {
+            cartItemEntity = entity.get();
             cartItemEntity.setQuantity(cartItemEntity.getQuantity() + quantity);
         } else {
             cartItemEntity = new CartItemEntity();
@@ -83,19 +84,25 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartEntity getCart(UserDetails userDetails) {
-        UserEntity user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+        UserEntity user = userService.getCurrentUser(userDetails);
+
         if (user.getCart() == null) {
             CartEntity cart = new CartEntity();
             cart.setPrice(BigDecimal.ZERO);
             return cart;
         }
+
         return user.getCart();
     }
 
     @Override
     public Set<CartItemEntity> getCartItems(CartEntity cart) {
-        if (cart == null) {
-            return new HashSet<>();
+        if (cart.getCartItemEntities() == null) {
+            throw new NullCartItemEntitiesException("Cart id " + cart.getId() + " returns null for cart item entities");
+        }
+
+        if (cart.getCartItemEntities().isEmpty()) {
+            return new LinkedHashSet<>();
         }
 
         return cart.getCartItemEntities();
@@ -104,9 +111,15 @@ public class CartServiceImpl implements CartService {
     @Override
     public void remove(Long id, UserDetails userDetails) {
         CartEntity cart = getCart(userDetails);
-        CartItemEntity cartItemEntity = cart.getCartItemEntities().stream().filter(i -> i.getId().equals(id)).toList().get(0);
-        cart.getCartItemEntities().remove(cartItemEntity);
-        cart.setPrice(cart.getPrice().subtract(cartItemEntity.getTotalPrice()));
+        Optional<CartItemEntity> entity = getCartItems(cart).stream().filter(i -> i.getId().equals(id)).findFirst();
+
+        if (entity.isPresent()) {
+            cart.getCartItemEntities().remove(entity.get());
+            cart.setPrice(cart.getPrice().subtract(entity.get().getTotalPrice()));
+        } else {
+            throw new CartItemEntityNotFoundException("Cart item entity with id " + id + " not found!");
+        }
+
         cartRepository.save(cart);
     }
 

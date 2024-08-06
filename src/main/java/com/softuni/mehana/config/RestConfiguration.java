@@ -38,7 +38,7 @@ public class RestConfiguration {
         return (r, b, e) -> {
             // put the logged user details into bearer token
             userService
-                    .getCurrentUser()
+                    .getCurrentUserDetailsEntity()
                     .ifPresent(u -> {
                         String bearerToken = jwtService.generateToken(
                                 u.getUuid().toString(),//
