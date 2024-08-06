@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitializeRoles implements CommandLineRunner {
 
-    private UserRoleRepository userRoleRepository;
+    private final UserRoleRepository userRoleRepository;
 
     public InitializeRoles(UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;

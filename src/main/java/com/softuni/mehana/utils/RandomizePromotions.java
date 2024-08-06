@@ -5,7 +5,6 @@ import com.softuni.mehana.model.entities.PromoEntity;
 import com.softuni.mehana.model.enums.ProductTypeEnum;
 import com.softuni.mehana.repository.ProductRepository;
 import com.softuni.mehana.repository.PromoRepository;
-import com.softuni.mehana.service.ProductService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

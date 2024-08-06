@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MenuController {
 
-    ProductService productService;
+    private final ProductService productService;
 
     public MenuController(ProductService productService) {
         this.productService = productService;

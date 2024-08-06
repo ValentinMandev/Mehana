@@ -1,6 +1,5 @@
 package com.softuni.mehana.model.dto;
 
-import com.softuni.mehana.model.entities.CartItemEntity;
 import lombok.Getter;
 import lombok.Setter;
 

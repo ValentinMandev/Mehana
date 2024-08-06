@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-public class ProductNotFoundException extends RuntimeException {
+public class NoUserRoleFoundException extends RuntimeException {
 
-    public ProductNotFoundException(String message) {
+    public NoUserRoleFoundException(String message) {
         super(message);
     }
 }

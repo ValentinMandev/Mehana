@@ -24,7 +24,6 @@ public class CartController {
     @GetMapping("/cart")
     public String getCart(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         CartEntity cart = cartService.getCart(userDetails);
-
         Set<CartItemEntity> cartItemEntities = cartService.getCartItems(cart);
 
         model.addAttribute("price", cart.getPrice());
@@ -34,15 +33,18 @@ public class CartController {
     }
 
     @PostMapping("/cart/add")
-    public String addToCart(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity,
-                            @AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request) {
+    public String addToCart(@RequestParam("productId") Long productId,
+                            @RequestParam("quantity") int quantity,
+                            @AuthenticationPrincipal UserDetails userDetails,
+                            HttpServletRequest request) {
         cartService.addToCart(productId, quantity, userDetails);
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }
 
     @DeleteMapping("/cart/remove/{id}")
-    public String removeCartItem(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails) {
+    public String removeCartItem(@PathVariable("id") Long id,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
         cartService.remove(id, userDetails);
         return "redirect:/cart";
     }

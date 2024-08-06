@@ -5,7 +5,6 @@ import com.softuni.mehana.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -14,10 +13,10 @@ import java.util.HashSet;
 @Component
 public class ResetCarts {
 
-    UserRepository userRepository;
-    CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public ResetCarts(UserRepository userRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;

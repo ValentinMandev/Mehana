@@ -5,11 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(3)
-@Component
+//@Order(3)
+//@Component
 public class InitializePromotions implements CommandLineRunner {
 
-    RandomizePromotions promotions;
+    private final RandomizePromotions promotions;
 
     public InitializePromotions(RandomizePromotions promotions) {
         this.promotions = promotions;

@@ -1,8 +1,6 @@
 package com.softuni.mehana.config;
 
 import com.softuni.mehana.model.enums.UserRoleEnum;
-import com.softuni.mehana.repository.UserRepository;
-import com.softuni.mehana.service.implementation.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

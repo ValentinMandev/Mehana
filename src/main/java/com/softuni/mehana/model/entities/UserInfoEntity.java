@@ -22,7 +22,7 @@ public class UserInfoEntity extends BaseEntity{
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(nullable = false, name = "phone_number")
+    @Column(nullable = false, unique = true, name = "phone_number")
     private String phoneNumber;
 
     @Column(nullable = false)

@@ -24,9 +24,9 @@ import java.util.Set;
 @Controller
 public class OrderController {
 
-    UserService userService;
-    CartService cartService;
-    OrderService orderService;
+    private final UserService userService;
+    private final CartService cartService;
+    private final OrderService orderService;
 
     public OrderController(UserService userService, CartService cartService, OrderService orderService) {
         this.userService = userService;
@@ -60,9 +60,7 @@ public class OrderController {
 
     @GetMapping("/orders/all")
     public String getOrderHistory(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        UserEntity user = userService.getCurrentUser(userDetails);
-        List<OrderDto> orders = orderService.getAllOrders(user.getId());
-
+        List<OrderDto> orders = orderService.getAllOrders(userDetails);
         model.addAttribute("orders", orders);
         return "/order-history";
     }
@@ -71,9 +69,7 @@ public class OrderController {
     public String getOrderDetails(@PathVariable("id") Long orderId,
                                   @AuthenticationPrincipal UserDetails userDetails,
                                   Model model) {
-        UserEntity user = userService.getCurrentUser(userDetails);
-        OrderDetailsDto order = orderService.getOrderDetails(user.getId(), orderId);
-
+        OrderDetailsDto order = orderService.getOrderDetails(userDetails, orderId);
         model.addAttribute("order", order);
         return "/order-details";
     }

@@ -32,7 +32,8 @@ public class OrderServiceImpl implements OrderService {
     private final ModelMapper modelMapper;
 
 
-    public OrderServiceImpl(@Qualifier("ordersRestClient") RestClient ordersRestClient, UserRepository userRepository, UserService userService, CartService cartService, ModelMapper modelMapper) {
+    public OrderServiceImpl(@Qualifier("ordersRestClient") RestClient ordersRestClient, UserRepository userRepository,
+                            UserService userService, CartService cartService, ModelMapper modelMapper) {
         this.ordersRestClient = ordersRestClient;
         this.userRepository = userRepository;
         this.userService = userService;
@@ -70,10 +71,11 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public List<OrderDto> getAllOrders(Long userId) {
+    public List<OrderDto> getAllOrders(UserDetails userDetails) {
+        UserEntity user = userService.getCurrentUser(userDetails);
         return ordersRestClient
                 .get()
-                .uri("/orders/all/{user_id}", userId)
+                .uri("/orders/all/{user_id}", user.getId())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});
@@ -81,10 +83,11 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public OrderDetailsDto getOrderDetails(Long userId, Long orderId) {
+    public OrderDetailsDto getOrderDetails(UserDetails userDetails, Long orderId) {
+        UserEntity user = userService.getCurrentUser(userDetails);
         return ordersRestClient
                 .get()
-                .uri("/orders/{user_id}/{orderId}", userId, orderId)
+                .uri("/orders/{user_id}/{orderId}", user.getId(), orderId)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});

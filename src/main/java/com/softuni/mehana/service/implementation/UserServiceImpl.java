@@ -4,15 +4,16 @@ import com.softuni.mehana.model.dto.UpdateProfileDto;
 import com.softuni.mehana.model.dto.UserRegisterDto;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.model.entities.UserInfoEntity;
+import com.softuni.mehana.model.entities.UserRoleEntity;
 import com.softuni.mehana.model.enums.UserRoleEnum;
 import com.softuni.mehana.model.userdetails.UserDetailsEntity;
 import com.softuni.mehana.repository.UserInfoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.repository.UserRoleRepository;
 import com.softuni.mehana.service.UserService;
+import com.softuni.mehana.service.exception.NoUserRoleFoundException;
 import com.softuni.mehana.service.exception.UserNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,9 +31,8 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final UserInfoRepository userInfoRepository;
 
-    public UserServiceImpl(ModelMapper modelMapper, PasswordEncoder passwordEncoder,
-                           UserRepository userRepository, UserRoleRepository userRoleRepository,
-                           UserInfoRepository userInfoRepository) {
+    public UserServiceImpl(ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRepository userRepository,
+                           UserRoleRepository userRoleRepository, UserInfoRepository userInfoRepository) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -46,7 +46,14 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = mapToUserEntity(userRegisterDto);
         userEntity.setUserInfo(userInfo);
-        userEntity.getRoles().add(userRoleRepository.findByRole(UserRoleEnum.USER).orElse(null));
+
+        Optional<UserRoleEntity> userRole = userRoleRepository.findByRole(UserRoleEnum.USER);
+
+        if (userRole.isEmpty()) {
+            throw new NoUserRoleFoundException("User role " + UserRoleEnum.USER.name() + " not found!");
+        }
+
+        userEntity.getRoles().add(userRole.get());
 
         userRepository.save(userEntity);
     }
@@ -94,6 +101,10 @@ public class UserServiceImpl implements UserService {
         UserEntity user = getCurrentUser(userDetails);
         UserInfoEntity userInfo = user.getUserInfo();
 
+        if (userInfo == null) {
+            userInfo = new UserInfoEntity();
+        }
+
         userInfo.setFirstName(updateProfileDto.getFirstName());
         userInfo.setLastName(updateProfileDto.getLastName());
         userInfo.setEmail(updateProfileDto.getEmail());
@@ -101,11 +112,11 @@ public class UserServiceImpl implements UserService {
         userInfo.setPhoneNumber(updateProfileDto.getPhoneNumber());
 
         userInfoRepository.save(userInfo);
-
     }
 
     @Override
-    public UpdateProfileDto getUpdateProfileDto(UserEntity user) {
+    public UpdateProfileDto getUpdateProfileDto(UserDetails userDetails) {
+        UserEntity user = getCurrentUser(userDetails);
         return modelMapper.map(user.getUserInfo(), UpdateProfileDto.class);
     }
 

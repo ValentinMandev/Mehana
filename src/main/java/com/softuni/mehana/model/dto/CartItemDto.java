@@ -1,6 +1,5 @@
 package com.softuni.mehana.model.dto;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
