@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
-    <title>Механа "Наздраве" - Добре дошли!</title>
+    <title th:text="#{home_head_title}">Механа "Наздраве" - Добре дошли!</title>
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <div class="hero-section text-center">
-    <h1>Добре дошли в нашата механа!</h1>
-    <p>Насладете се на вкусните ни гозби!</p>
+    <h1 th:text="#{home_welcome}">Добре дошли в нашата механа!</h1>
+    <p th:text="#{home_enjoy}">Насладете се на вкусните ни гозби!</p>
 </div>
 
 
 <div class="container mt-5">
-    <h2 class="text-center">Промоции</h2>
+    <h2 class="text-center" th:text="#{home_promotions}">Промоции</h2>
     <div class="row">
         <div class="col-md-4" th:each="p : ${promotions}"  th:if="${p.product.isEnabled()}">
             <div class="card">
@@ -36,7 +36,7 @@
                         <div class="d-flex justify-content-center">
                             <input type="hidden" name="productId" th:value="${p.getProduct().id}">
                             <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                            <button class="btn btn-primary ml-2">Добави в количката</button>
+                            <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                         </div>
                     </form>
                 </div>
@@ -47,24 +47,24 @@
 
 
 <div class="container mt-5 reviews">
-    <h2 class="text-center">Какво казват клиентите ни</h2>
+    <h2 class="text-center" th:text="#{home_reviews}">Какво казват клиентите ни</h2>
     <div class="row">
         <div class="col-md-4 review-card">
             <div>
-                <p class="font-italic">"Страхотна обстановка и много вкусна храна! Препоръчвам!"</p>
-                <h5 class="review-name">- Иван Добрев</h5>
+                <p class="font-italic" th:text="#{home_review_1}">"Страхотна обстановка и много вкусна храна! Препоръчвам!"</p>
+                <h5 class="review-name" th:text="#{home_review_1_name}">- Иван Добрев</h5>
             </div>
         </div>
         <div class="col-md-4 review-card">
             <div>
-                <p class="font-italic">"Прекарахме си прекрасна вечер в Механа "Наздраве"! Всичко беше на ниво - обслужване, обстановка, меню! Пак ще посетим задължително!"</p>
-                <h5 class="review-name">- Христина Митова</h5>
+                <p class="font-italic" th:text="#{home_review_2}">"Прекарахме си прекрасна вечер в Механа "Наздраве"! Всичко беше на ниво - обслужване, обстановка, меню! Пак ще посетим задължително!"</p>
+                <h5 class="review-name" th:text="#{home_review_2_name}">- Христина Митова</h5>
             </div>
         </div>
         <div class="col-md-4 review-card">
             <div>
-                <p class="font-italic">"Благодарим за вкусната храна и доброто обслужване! Очаровани сме!"</p>
-                <h5 class="review-name">- Теодора Петкова</h5>
+                <p class="font-italic"  th:text="#{home_review_3}">"Благодарим за вкусната храна и доброто обслужване! Очаровани сме!"</p>
+                <h5 class="review-name"  th:text="#{home_review_3_name}">- Теодора Петкова</h5>
             </div>
         </div>
     </div>

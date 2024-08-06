@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
-    <title>Механа "Наздраве" - Вход</title>
+    <title th:text="#{login_head_title}">Механа "Наздраве" - Вход</title>
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
 </head>
 <body>
@@ -14,25 +14,25 @@
 
 
 <div class="container mt-lg-5" style="width: 300px">
-    <h1 class="text-center">Вход</h1>
+    <h1 class="text-center" th:text="#{login_text}">Вход</h1>
 
-    <div th:if="${param.error}" class="alert-danger danger" id="login-error">
+    <div th:if="${param.error}" class="alert-danger danger" id="login-error"  th:text="#{login_error}">
         Невалидно потребителско име или парола
     </div>
 
     <form th:action="@{/user/login}" th:method="post" class="login-form">
         <div class="form-group">
-            <label for="username">Потребителско име</label>
+            <label for="username" th:text="#{login_username}">Потребителско име</label>
             <input type="text" class="form-control" id="username" name="username" >
 
         </div>
         <div class="form-group">
-            <label for="password">Парола</label>
+            <label for="password" th:text="#{login_password}">Парола</label>
             <input type="password" class="form-control" id="password" name="password">
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Вход</button>
+        <button type="submit" class="btn btn-primary" th:text="#{login_text}">Вход</button>
     </form>
 
 </div>

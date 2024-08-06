@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
-    <title>Механа "Наздраве" - Регистрация</title>
+    <title th:text="#{register_head_title}">Механа "Наздраве" - Регистрация</title>
 </head>
 <body>
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 <div class="container mt-lg-5" style="width: 1200px">
-    <h1 class="text-center">Регистрация</h1>
+    <h1 class="text-center" th:text="#{register_text}">Регистрация</h1>
     <form th:action="@{/user/register}" th:object="${userRegisterDto}" method="post"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center registration-form">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="username">Потребителско име</label>
+                <label for="username" th:text="#{register_username}">Потребителско име</label>
                 <input type="text" class="form-control" id="username" th:field="*{username}">
                 <small th:if="${#fields.hasErrors('username')}"
                        th:errors="*{username}"
@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="firstName">Име</label>
+                <label for="firstName" th:text="#{register_first_name}">Име</label>
                 <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
                 <small th:if="${#fields.hasErrors('firstName')}"
                        th:errors="*{firstName}"
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="lastName">Фамилия</label>
+                <label for="lastName" th:text="#{register_last_name}">Фамилия</label>
                 <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
                 <small th:if="${#fields.hasErrors('lastName')}"
                        th:errors="*{lastName}"
@@ -55,7 +55,7 @@
 
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="phoneNumber">Телефон</label>
+                <label for="phoneNumber" th:text="#{register_phone_number}">Телефон</label>
                 <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
                 <small th:if="${#fields.hasErrors('phoneNumber')}"
                        th:errors="*{phoneNumber}"
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="address">Адрес</label>
+                <label for="address" th:text="#{register_address}">Адрес</label>
                 <input type="text" class="form-control" id="address" th:field="*{address}">
                 <small th:if="${#fields.hasErrors('address')}"
                        th:errors="*{address}"
@@ -73,7 +73,7 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="password">Парола</label>
+                <label for="password" th:text="#{register_password}">Парола</label>
                 <input type="password" class="form-control" id="password" th:field="*{password}">
                 <small th:if="${#fields.hasErrors('password')}"
                        th:errors="*{password}"
@@ -82,7 +82,7 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="confirmPassword">Потвърдете паролата</label>
+                <label for="confirmPassword" th:text="#{register_confirm_password}">Потвърдете паролата</label>
                 <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}">
                 <small th:if="${#fields.hasErrors('confirmPassword')}"
                        th:errors="*{confirmPassword}"
@@ -98,7 +98,7 @@
                th:text="${#fields.errors('passwordMatching')}"
                class="danger text-center pass-not-match font-weight-bold"></small>
 
-        <button type="submit" class="btn btn-primary">Регистрация</button>
+        <button type="submit" class="btn btn-primary" th:text="#{register_text}">Регистрация</button>
     </form>
 </div>
 <footer th:replace="~{fragments/commons :: footer}"></footer>

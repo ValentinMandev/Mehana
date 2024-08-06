@@ -3,7 +3,7 @@
       lang="en"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Механа "Наздраве" - Меню</title>
+    <title th:text="#{menu_head_title}">Механа "Наздраве" - Меню</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
@@ -15,28 +15,28 @@
 <nav th:replace="~{fragments/commons :: navbar}"></nav>
 
 <div class="container menu-section">
-    <h1 class="text-center">Нашето меню</h1>
-    <h5 class="text-center">Поглезете се с нашите вкусни български гозби</h5>
+    <h1 class="text-center" th:text="#{menu_our_menu}">Нашето меню</h1>
+    <h5 class="text-center" th:text="#{menu_spoil_yourself}">Поглезете се с нашите вкусни български гозби</h5>
 
     <div class="text-center add-product-button" sec:authorize="hasRole('ADMIN')">
-        <a th:href="@{/add-product}" th:method="get" class="btn-primary btn">Добавяне на ястие</a>
+        <a th:href="@{/add-product}" th:method="get" class="btn-primary btn" th:text="#{menu_add_product}">Добавяне на ястие</a>
     </div>
 
     <ul class="nav nav-tabs justify-content-center" id="menuTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active text-success font-weight-bold" id="starters-tab" data-toggle="tab" href="#starters" role="tab" aria-controls="starters" aria-selected="true">Салати и предястия</a>
+            <a class="nav-link active text-success font-weight-bold" id="starters-tab" data-toggle="tab" href="#starters" role="tab" aria-controls="starters" aria-selected="true" th:text="#{menu_salads_starters}">Салати и предястия</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-success font-weight-bold" id="soups-tab" data-toggle="tab" href="#soups" role="tab" aria-controls="soups" aria-selected="false">Супи</a>
+            <a class="nav-link text-success font-weight-bold" id="soups-tab" data-toggle="tab" href="#soups" role="tab" aria-controls="soups" aria-selected="false" th:text="#{menu_soups}">Супи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-success font-weight-bold" id="main-courses-tab" data-toggle="tab" href="#main-courses" role="tab" aria-controls="main-courses" aria-selected="false">Основни ястия</a>
+            <a class="nav-link text-success font-weight-bold" id="main-courses-tab" data-toggle="tab" href="#main-courses" role="tab" aria-controls="main-courses" aria-selected="false" th:text="#{menu_main_courses}">Основни ястия</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-success font-weight-bold" id="bread-tab" data-toggle="tab" href="#bread" role="tab" aria-controls="bread" aria-selected="false">Хляб</a>
+            <a class="nav-link text-success font-weight-bold" id="bread-tab" data-toggle="tab" href="#bread" role="tab" aria-controls="bread" aria-selected="false" th:text="#{menu_bread}">Хляб</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-success font-weight-bold" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false">Десерти</a>
+            <a class="nav-link text-success font-weight-bold" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false" th:text="#{menu_desserts}">Десерти</a>
         </li>
 
     </ul>
@@ -59,7 +59,7 @@
                                 <div class="d-flex justify-content-center">
                                     <input type="hidden" name="productId" th:value="${p.id}">
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                                    <button class="btn btn-primary ml-2">Добави в количката</button>
+                                    <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                                 </div>
 
                             </form>
@@ -92,7 +92,7 @@
                                 <div class="d-flex justify-content-center">
                                     <input type="hidden" name="productId" th:value="${p.id}">
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                                    <button class="btn btn-primary ml-2">Добави в количката</button>
+                                    <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                                 </div>
 
                             </form>
@@ -128,7 +128,7 @@
                                 <div class="d-flex justify-content-center">
                                     <input type="hidden" name="productId" th:value="${p.id}">
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                                    <button class="btn btn-primary ml-2">Добави в количката</button>
+                                    <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                                 </div>
 
                             </form>
@@ -161,7 +161,7 @@
                                 <div class="d-flex justify-content-center">
                                     <input type="hidden" name="productId" th:value="${p.id}">
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                                    <button class="btn btn-primary ml-2">Добави в количката</button>
+                                    <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                                 </div>
 
                             </form>
@@ -197,7 +197,7 @@
                                 <div class="d-flex justify-content-center">
                                     <input type="hidden" name="productId" th:value="${p.id}">
                                     <input type="number" class="form-control quantity-input" name="quantity" value="1" min="1">
-                                    <button class="btn btn-primary ml-2">Добави в количката</button>
+                                    <button class="btn btn-primary ml-2" th:text="#{add_to_cart}">Добави в количката</button>
                                 </div>
                             </form>
                             <div class="admin-actions" sec:authorize="hasRole('ADMIN')">
