@@ -32,18 +32,16 @@ public class ProductServiceImpl implements ProductService {
     private final UserRepository userRepository;
     private final RandomizePromotions randomizePromotions;
     private final PromoRepository promoRepository;
-    private final CartService cartService;
     private final ModelMapper modelMapper;
 
     public ProductServiceImpl(ProductRepository productRepository, CartRepository cartRepository,
                               UserRepository userRepository, RandomizePromotions randomizePromotions,
-                              PromoRepository promoRepository, CartService cartService, ModelMapper modelMapper) {
+                              PromoRepository promoRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.randomizePromotions = randomizePromotions;
         this.promoRepository = promoRepository;
-        this.cartService = cartService;
         this.modelMapper = modelMapper;
     }
 
@@ -138,9 +136,10 @@ public class ProductServiceImpl implements ProductService {
                 .filter(u -> u.getCart() != null)
                 .forEach(u -> {
                     CartEntity cart = u.getCart();
-                    for (CartItemEntity cartItemEntity : cartService.getCartItems(cart)) {
+                    for (CartItemEntity cartItemEntity : cart.getCartItemEntities()) {
                         if (cartItemEntity.getProduct().getId().equals(product.getId())) {
                             cart.getCartItemEntities().remove(cartItemEntity);
+                            cart.setPrice(cart.getPrice().subtract(cartItemEntity.getTotalPrice()));
                             cartRepository.save(cart);
                             break;
                         }
