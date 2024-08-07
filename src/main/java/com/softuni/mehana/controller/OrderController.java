@@ -14,9 +14,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Set;
@@ -45,25 +47,35 @@ public class OrderController {
 
         Set<CartItemEntity> cartItemEntities = cartService.getCartItems(cart);
 
-        model.addAttribute("userInfo", user.getUserInfo());
+        model.addAttribute("checkoutDto", user.getUserInfo());
         model.addAttribute("price", cart.getPrice());
         model.addAttribute("cartItems", cartItemEntities);
 
         return "checkout";
     }
 
-    @PostMapping("/finalize-order")
-    public String checkout(@Valid CheckoutDto checkoutDto, @AuthenticationPrincipal UserDetails userDetails) {
+    @PostMapping("/checkout")
+    public String checkout(@AuthenticationPrincipal UserDetails userDetails,
+                           @Valid CheckoutDto checkoutDto,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("checkoutDto", checkoutDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.checkoutDto", bindingResult);
+            return "checkout";
+        }
+
         UserEntity user = userService.getCurrentUser(userDetails);
         orderService.storeOrder(user, checkoutDto);
-        return "order-successful";
+        return "/order/success";
     }
 
     @GetMapping("/orders/all")
     public String getOrderHistory(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         List<OrderDto> orders = orderService.getAllOrders(userDetails);
         model.addAttribute("orders", orders);
-        return "/order-history";
+        return "/order/history";
     }
 
     @GetMapping("/orders/{id}")
@@ -72,7 +84,7 @@ public class OrderController {
                                   Model model) {
         OrderDetailsDto order = orderService.getOrderDetails(userDetails, orderId);
         model.addAttribute("order", order);
-        return "/order-details";
+        return "/order/details";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.softuni.mehana.controller;
 
+import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -52,9 +53,17 @@ public class CartControllerIT {
                         .andExpect(status().is3xxRedirection());
 
         Optional<UserEntity> user = userRepository.findByUsername("valio");
-        Assertions.assertTrue(user.get().getCart().getCartItemEntities()
+        CartItemEntity cartItem = user.get().getCart().getCartItemEntities()
                 .stream()
-                .anyMatch(i -> i.getProduct().getId().equals(Long.valueOf(3))));
+                .filter(i -> i.getProduct().getId().equals(Long.valueOf(3)))
+                .findFirst().orElse(null);
+
+        Assertions.assertTrue(user.get().getCart().getCartItemEntities().contains(cartItem));
+
+        mockMvc.perform(delete("/cart/remove/{id}", cartItem.getId())
+                        .session(session)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(status().is3xxRedirection());
     }
 
 

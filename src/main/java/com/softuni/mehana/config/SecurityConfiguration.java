@@ -34,7 +34,6 @@ public class SecurityConfiguration {
                                                 "/cart/add",
                                                 "/cart/remove",
                                                 "/checkout",
-                                                "/finalize-order",
                                                 "/order-history",
                                                 "/orders/all",
                                                 "/orders/{id}",

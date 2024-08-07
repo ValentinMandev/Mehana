@@ -25,11 +25,13 @@
             <div class="card">
                 <img th:src="*{p.getProduct().imageUrl}" th:alt="*{p.getProduct().nameEng}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="*{p.getProduct().name}"></h5>
-                    <h5 class="card-title" th:text="*{p.getProduct().nameEng}"></h5>
+                    <div th:switch="${#locale.toString()}">
+                        <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.getProduct().name}"></h5>
+                        <h5 class="card-title" th:case="'en_US'" th:text="*{p.getProduct().nameEng}"></h5>
+                    </div>
                     <p class="card-text text-success"><strong><del th:text="*{p.getProduct().price}" class="text-danger"></del>
                         <span th:text="*{#numbers.formatDecimal(p.getProduct().promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                        лв.</strong></p>
+                        <span th:text="#{currency_name}"> лв.</span></strong></p>
                     <form
                        th:method="post"
                        th:action="@{/cart/add}">

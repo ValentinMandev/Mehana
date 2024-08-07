@@ -74,6 +74,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void disableProduct(ProductEntity product) {
         product.setEnabled(false);
+        productRepository.save(product);
         removeFromCarts(product);
         if (product.isOnPromotion()) {
             product.setOnPromotion(false);

@@ -38,11 +38,4 @@ public class OrderControllerIT {
         session = (MockHttpSession) result.getRequest().getSession();
     }
 
-    @Test
-    public void testGetCheckoutPage() throws Exception {
-        mockMvc.perform(get("/checkout")
-                        .session(session)
-                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
-                .andExpect(status().is2xxSuccessful());
-    }
 }

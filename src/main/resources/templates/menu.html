@@ -47,12 +47,14 @@
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="*{p.name}"></h5>
-                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
-                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                            <div th:switch="${#locale.toString()}">
+                                <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.name}"></h5>
+                                <h5 class="card-title" th:case="'en_US'" th:text="*{p.nameEng}"></h5>
+                            </div>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> <span th:text="#{currency_name}"> лв.</span></strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong><span th:text="#{special_offer}"></span> <del th:text="*{p.price}" class="text-danger"></del>
                                 <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                                лв.</strong></p>
+                                <span th:text="#{currency_name}"> лв.</span></strong></p>
                             <form
                                     th:method="post"
                                     th:action="@{/cart/add}">
@@ -83,9 +85,11 @@
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="*{p.name}"></h5>
-                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <div th:switch="${#locale.toString()}">
+                                <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.name}"></h5>
+                                <h5 class="card-title" th:case="'en_US'" th:text="*{p.nameEng}"></h5>
+                            </div>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> <span th:text="#{currency_name}"> лв.</span></strong></p>
                             <form
                                     th:method="post"
                                     th:action="@{/cart/add}">
@@ -116,12 +120,14 @@
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="*{p.name}"></h5>
-                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
-                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                            <div th:switch="${#locale.toString()}">
+                                <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.name}"></h5>
+                                <h5 class="card-title" th:case="'en_US'" th:text="*{p.nameEng}"></h5>
+                            </div>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> <span th:text="#{currency_name}"> лв.</span></strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong><span th:text="#{special_offer}"></span> <del th:text="*{p.price}" class="text-danger"></del>
                                 <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                                лв.</strong></p>
+                                <span th:text="#{currency_name}"> лв.</span></strong></p>
                             <form
                                     th:method="post"
                                     th:action="@{/cart/add}">
@@ -152,9 +158,11 @@
                     <div class="card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="*{p.name}"></h5>
-                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
+                            <div th:switch="${#locale.toString()}">
+                                <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.name}"></h5>
+                                <h5 class="card-title" th:case="'en_US'" th:text="*{p.nameEng}"></h5>
+                            </div>
+                            <p class="card-text"><strong><span th:text="*{p.price}"></span> <span th:text="#{currency_name}"> лв.</span></strong></p>
                             <form
                                     th:method="post"
                                     th:action="@{/cart/add}">
@@ -185,12 +193,14 @@
                     <div class="card menu-card">
                         <img th:src="*{p.imageUrl}" class="card-img-top" th:alt="*{p.nameEng}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="*{p.name}"></h5>
-                            <h5 class="card-title" th:text="*{p.nameEng}"></h5>
-                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> лв.</strong></p>
-                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong>ПРОМО ЦЕНА: <del th:text="*{p.price}" class="text-danger"></del>
+                            <div th:switch="${#locale.toString()}">
+                                <h5 class="card-title" th:case="'bg_BG'" th:text="*{p.name}"></h5>
+                                <h5 class="card-title" th:case="'en_US'" th:text="*{p.nameEng}"></h5>
+                            </div>
+                            <p class="card-text" th:if="${!p.isOnPromotion}"><strong><span th:text="*{p.price}"></span> <span th:text="#{currency_name}"> лв.</span></strong></p>
+                            <p class="card-text text-success" th:if="${p.isOnPromotion}"><strong><span th:text="#{special_offer}"></span> <del th:text="*{p.price}" class="text-danger"></del>
                                 <span th:text="*{#numbers.formatDecimal(p.promoPrice, 0, 'COMMA', 2, 'POINT')}"></span>
-                                лв.</strong></p>
+                                <span th:text="#{currency_name}"> лв.</span></strong></p>
                             <form
                                     th:method="post"
                                     th:action="@{/cart/add}">

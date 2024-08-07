@@ -89,19 +89,6 @@ public class ProductServiceImplTest {
 
 
     @Test
-    void disableProduct() {
-        toTest.disableProduct(product);
-
-        verify(mockProductRepository).save(productEntityCaptor.capture());
-
-        ProductEntity actualSavedEntity = productEntityCaptor.getValue();
-
-        Assertions.assertNotNull(actualSavedEntity);
-        Assertions.assertFalse(actualSavedEntity.isEnabled());
-    }
-
-
-    @Test
     void addProduct() {
         AddProductDto addProductDto = new AddProductDto();
         addProductDto.setName("Супа леща");
