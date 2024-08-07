@@ -17,7 +17,7 @@ public interface UserService {
 
     boolean comparePasswords(UserRegisterDto userRegisterDto);
 
-    void updateProfile(UpdateProfileDto updateProfileDto, UserDetails userDetails);
+    void updateProfile(UpdateProfileDto updateProfileDto, UserEntity user);
 
     UpdateProfileDto getUpdateProfileDto(UserDetails userDetails);
 }

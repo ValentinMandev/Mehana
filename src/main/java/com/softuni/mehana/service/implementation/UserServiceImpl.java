@@ -11,7 +11,6 @@ import com.softuni.mehana.repository.UserInfoRepository;
 import com.softuni.mehana.repository.UserRepository;
 import com.softuni.mehana.repository.UserRoleRepository;
 import com.softuni.mehana.service.UserService;
-import com.softuni.mehana.service.exception.NoUserRoleFoundException;
 import com.softuni.mehana.service.exception.UserNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -47,13 +46,9 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = mapToUserEntity(userRegisterDto);
         userEntity.setUserInfo(userInfo);
 
-        Optional<UserRoleEntity> userRole = userRoleRepository.findByRole(UserRoleEnum.USER);
+        UserRoleEntity userRole = userRoleRepository.findByRole(UserRoleEnum.USER).orElse(null);
 
-        if (userRole.isEmpty()) {
-            throw new NoUserRoleFoundException("User role " + UserRoleEnum.USER.name() + " not found!");
-        }
-
-        userEntity.getRoles().add(userRole.get());
+        userEntity.getRoles().add(userRole);
 
         userRepository.save(userEntity);
     }
@@ -97,8 +92,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateProfile(UpdateProfileDto updateProfileDto, UserDetails userDetails) {
-        UserEntity user = getCurrentUser(userDetails);
+    public void updateProfile(UpdateProfileDto updateProfileDto, UserEntity user) {
         UserInfoEntity userInfo = user.getUserInfo();
 
         if (userInfo == null) {

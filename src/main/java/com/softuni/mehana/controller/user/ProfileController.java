@@ -1,6 +1,7 @@
 package com.softuni.mehana.controller.user;
 
 import com.softuni.mehana.model.dto.UpdateProfileDto;
+import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -40,7 +41,8 @@ public class ProfileController {
             return "profile";
         }
 
-        userService.updateProfile(updateProfileDto, userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        userService.updateProfile(updateProfileDto, user);
 
         return "redirect:/";
     }
