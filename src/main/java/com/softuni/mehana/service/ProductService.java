@@ -11,9 +11,9 @@ public interface ProductService {
 
     List<ProductEntity> getAllByType(ProductTypeEnum productTypeEnum);
 
-    void updateProduct(UpdateProductDto updateProductDto, Long id);
+    void updateProduct(UpdateProductDto updateProductDto, ProductEntity product);
 
-    void disableProduct(Long id);
+    void disableProduct(ProductEntity product);
 
     void addProduct(AddProductDto addProductDto);
 

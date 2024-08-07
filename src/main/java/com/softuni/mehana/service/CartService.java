@@ -2,16 +2,16 @@ package com.softuni.mehana.service;
 
 import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
+import com.softuni.mehana.model.entities.ProductEntity;
+import com.softuni.mehana.model.entities.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
 public interface CartService {
-    void addToCart(Long productId, int quantity, UserDetails userDetails);
-
-    CartEntity getCart(UserDetails userDetails);
+    void addToCart(ProductEntity product, int quantity, UserEntity user);
+    CartEntity getCart(UserEntity user);
     Set<CartItemEntity> getCartItems(CartEntity cart);
-    void remove(Long id, UserDetails userDetails);
-
-    void clearCart(UserDetails userDetails);
+    void remove(Long id, UserEntity user);
+    void clearCart(UserEntity user);
 }

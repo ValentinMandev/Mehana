@@ -2,7 +2,11 @@ package com.softuni.mehana.controller;
 
 import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
+import com.softuni.mehana.model.entities.ProductEntity;
+import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.service.CartService;
+import com.softuni.mehana.service.ProductService;
+import com.softuni.mehana.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,14 +20,19 @@ import java.util.Set;
 public class CartController {
 
     private final CartService cartService;
+    private final UserService userService;
+    private final ProductService productService;
 
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, UserService userService, ProductService productService) {
         this.cartService = cartService;
+        this.userService = userService;
+        this.productService = productService;
     }
 
     @GetMapping("/cart")
     public String getCart(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        CartEntity cart = cartService.getCart(userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        CartEntity cart = cartService.getCart(user);
         Set<CartItemEntity> cartItemEntities = cartService.getCartItems(cart);
 
         model.addAttribute("price", cart.getPrice());
@@ -37,7 +46,9 @@ public class CartController {
                             @RequestParam("quantity") int quantity,
                             @AuthenticationPrincipal UserDetails userDetails,
                             HttpServletRequest request) {
-        cartService.addToCart(productId, quantity, userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        ProductEntity product = productService.getProductById(productId);
+        cartService.addToCart(product, quantity, user);
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }
@@ -45,13 +56,15 @@ public class CartController {
     @DeleteMapping("/cart/remove/{id}")
     public String removeCartItem(@PathVariable("id") Long id,
                                  @AuthenticationPrincipal UserDetails userDetails) {
-        cartService.remove(id, userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        cartService.remove(id, user);
         return "redirect:/cart";
     }
 
     @DeleteMapping("/cart/remove/all")
     public String clearCart(@AuthenticationPrincipal UserDetails userDetails) {
-        cartService.clearCart(userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        cartService.clearCart(user);
         return "redirect:/cart";
     }
 

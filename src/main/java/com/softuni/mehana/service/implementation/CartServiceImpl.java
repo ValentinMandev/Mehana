@@ -35,16 +35,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addToCart(Long productId, int quantity, UserDetails userDetails) {
+    public void addToCart(ProductEntity product, int quantity, UserEntity user) {
 
-        UserEntity user = userService.getCurrentUser(userDetails);
-
-        CartEntity cart = getCart(userDetails);
-
-        ProductEntity product = productService.getProductById(productId);
+        CartEntity cart = getCart(user);
 
         if (!product.isEnabled()) {
-            throw new ProductDisabledException("Product with id " + productId + " is disabled!");
+            throw new ProductDisabledException("Product with id " + product.getId() + " is disabled!");
         }
 
         CartItemEntity cartItemEntity;
@@ -83,9 +79,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartEntity getCart(UserDetails userDetails) {
-        UserEntity user = userService.getCurrentUser(userDetails);
-
+    public CartEntity getCart(UserEntity user) {
         if (user.getCart() == null) {
             CartEntity cart = new CartEntity();
             cart.setPrice(BigDecimal.ZERO);
@@ -109,8 +103,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void remove(Long id, UserDetails userDetails) {
-        CartEntity cart = getCart(userDetails);
+    public void remove(Long id, UserEntity user) {
+        CartEntity cart = getCart(user);
         Optional<CartItemEntity> entity = getCartItems(cart).stream().filter(i -> i.getId().equals(id)).findFirst();
 
         if (entity.isPresent()) {
@@ -124,8 +118,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void clearCart(UserDetails userDetails) {
-        CartEntity cart = getCart(userDetails);
+    public void clearCart(UserEntity user) {
+        CartEntity cart = getCart(user);
         cart.setCartItemEntities(new HashSet<>());
         cart.setPrice(BigDecimal.ZERO);
         cartRepository.save(cart);

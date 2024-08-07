@@ -43,13 +43,11 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public void storeOrder(UserDetails userDetails, CheckoutDto checkoutDto) {
-        UserEntity user = userService.getCurrentUser(userDetails);
-
+    public void storeOrder(UserEntity user, CheckoutDto checkoutDto) {
         StoreOrderDto order = storeOrderDtoBuilder(user, checkoutDto);
 
         Set<CartItemDto> cartItemDtos = new LinkedHashSet<>();
-        CartEntity cart = cartService.getCart(userDetails);
+        CartEntity cart = cartService.getCart(user);
 
         for (CartItemEntity cartItemEntity : cartService.getCartItems(cart)) {
             CartItemDto cartItemDto = modelMapper.map(cartItemEntity, CartItemDto.class);

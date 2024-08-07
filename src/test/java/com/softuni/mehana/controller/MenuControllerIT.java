@@ -1,4 +1,4 @@
-package com.softuni.mehana.controller.user;
+package com.softuni.mehana.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class LoginControllerIT {
+public class MenuControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetLoginPage() throws Exception {
-        mockMvc.perform(get("/user/login")
+    public void testGetMenu() throws Exception {
+        mockMvc.perform(get("/menu")
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().is2xxSuccessful());
     }

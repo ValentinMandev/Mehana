@@ -57,9 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(UpdateProductDto updateProductDto, Long id) {
-        ProductEntity product = getProductById(id);
-
+    public void updateProduct(UpdateProductDto updateProductDto, ProductEntity product) {
         product.setName(updateProductDto.getName());
         product.setNameEng(updateProductDto.getNameEng());
         product.setType(updateProductDto.getType());
@@ -74,9 +72,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void disableProduct(Long id) {
-        ProductEntity product = getProductById(id);
-
+    public void disableProduct(ProductEntity product) {
         product.setEnabled(false);
         removeFromCarts(product);
         if (product.isOnPromotion()) {
@@ -84,12 +80,8 @@ public class ProductServiceImpl implements ProductService {
             randomizePromotions.setPromotion(product.getType());
             List<PromoEntity> promotions = promoRepository.findAll();
 
-            Optional<PromoEntity> promo = promotions.stream().filter(p -> p.getProduct().getId().equals(product.getId())).findFirst();
-            if (promo.isEmpty()) {
-                throw new PromotionsNotFoundException("Product with id " + product.getId() + " not found in promotions repository!");
-            }
-
-            promoRepository.delete(promo.get());
+            PromoEntity promo = promotions.stream().filter(p -> p.getProduct().getId().equals(product.getId())).findFirst().orElse(null);
+            promoRepository.delete(promo);
         }
 
         productRepository.save(product);

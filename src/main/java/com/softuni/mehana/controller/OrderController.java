@@ -36,13 +36,13 @@ public class OrderController {
 
     @GetMapping("/checkout")
     public String getFinalizePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        CartEntity cart = cartService.getCart(userDetails);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        CartEntity cart = cartService.getCart(user);
 
         if (cart.getCartItemEntities().isEmpty()) {
             return "redirect:/cart";
         }
 
-        UserEntity user = userService.getCurrentUser(userDetails);
         Set<CartItemEntity> cartItemEntities = cartService.getCartItems(cart);
 
         model.addAttribute("userInfo", user.getUserInfo());
@@ -54,7 +54,8 @@ public class OrderController {
 
     @PostMapping("/finalize-order")
     public String checkout(@Valid CheckoutDto checkoutDto, @AuthenticationPrincipal UserDetails userDetails) {
-        orderService.storeOrder(userDetails, checkoutDto);
+        UserEntity user = userService.getCurrentUser(userDetails);
+        orderService.storeOrder(user, checkoutDto);
         return "order-successful";
     }
 

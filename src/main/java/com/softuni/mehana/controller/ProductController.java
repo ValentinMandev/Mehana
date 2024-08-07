@@ -2,6 +2,7 @@ package com.softuni.mehana.controller;
 
 import com.softuni.mehana.model.dto.AddProductDto;
 import com.softuni.mehana.model.dto.UpdateProductDto;
+import com.softuni.mehana.model.entities.ProductEntity;
 import com.softuni.mehana.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -40,13 +41,15 @@ public class ProductController {
             return "admin/edit-product";
         }
 
-        productService.updateProduct(updateProductDto, id);
+        ProductEntity product = productService.getProductById(id);
+        productService.updateProduct(updateProductDto, product);
         return "redirect:/menu";
     }
 
     @PostMapping("/disable-product/{id}")
     public String disableProduct(@PathVariable("id") Long id) {
-        productService.disableProduct(id);
+        ProductEntity product = productService.getProductById(id);
+        productService.disableProduct(product);
         return "redirect:/menu";
     }
 
