@@ -26,7 +26,7 @@ public class ProfileController {
     public String getProfile(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         UpdateProfileDto updateProfileDto = userService.getUpdateProfileDto(userDetails);
         model.addAttribute("updateProfileDto", updateProfileDto);
-        return "/profile";
+        return "profile";
     }
 
     @PostMapping("/user/edit-profile")

@@ -1,9 +1,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/mehana?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-    username: ${db_username}
-    password: ${db_password}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   servlet:
     multipart:
@@ -17,7 +17,7 @@ spring:
 
   sql:
     init:
-      mode: never
+      mode: always
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -26,26 +26,23 @@ spring:
     open-in-view: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
     defer-datasource-initialization: true
 
   thymeleaf:
     check-template-location: true
-    cache: false
-    prefix: file:./src/main/resources/templates/
-    resources:
-      static-locations: file:./src/main/resources/static/
+    cache: true
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   error:
     whitelabel:
       enabled: false
 
 orders:
   api:
-    baseUrl: "${OFFERS_BASE_URL:http://localhost:8081}"
+    baseUrl: ${OFFERS_BASE_URL:http://localhost:8081}
 
 jwt:
-  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
-  expiration: ${JWT_EXPIRATION:60000}
+  secret: ${JWT_KEY}
+  expiration: ${JWT_EXPIRATION:3600000}

@@ -68,14 +68,14 @@ public class OrderController {
 
         UserEntity user = userService.getCurrentUser(userDetails);
         orderService.storeOrder(user, checkoutDto);
-        return "/order/success";
+        return "order/success";
     }
 
     @GetMapping("/orders/all")
     public String getOrderHistory(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         List<OrderDto> orders = orderService.getAllOrders(userDetails);
         model.addAttribute("orders", orders);
-        return "/order/history";
+        return "order/history";
     }
 
     @GetMapping("/orders/{id}")
@@ -84,7 +84,7 @@ public class OrderController {
                                   Model model) {
         OrderDetailsDto order = orderService.getOrderDetails(userDetails, orderId);
         model.addAttribute("order", order);
-        return "/order/details";
+        return "order/details";
     }
 
 }

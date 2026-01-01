@@ -203,3 +203,20 @@ footer {
 #lang {
     margin-top: 7px;
 }
+
+.notification-popup {
+    animation: slideIn 0.3s ease-out;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+

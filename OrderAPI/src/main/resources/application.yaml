@@ -1,46 +1,49 @@
 spring:
-    application:
-        name: OrderAPI
+  application:
+    name: OrderAPI
 
-    datasource:
-        url: "jdbc:mysql://localhost:3306/mehana_orders?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-        username: ${db_username}
-        password: ${db_password}
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
-    jpa:
-        hibernate:
-            ddl-auto: update
-        open-in-view: false
-        properties:
-            hibernate:
-                format_sql: true
-        defer-datasource-initialization: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect  # ДОБАВИ ТОЗИ РЕД!
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
 
-    sql:
-        init:
-          mode: never
+  sql:
+    init:
+      mode: never
 
 server:
-    port: 8081
-    error:
-        whitelabel:
-            enabled: false
+  port: 8081
+  error:
+    whitelabel:
+      enabled: false
 
 management:
-    endpoints:
-        web:
-            exposure:
-                include: "*"
-    server:
-        port: 8082
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 8082
 
 
 logging:
-    level:
-        org.hibernate.SQL: DEBUG
-        org.hibernate.orm.jdbc.bind: TRACE
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
 
 offers.retention.period: P300D
 
 jwt:
-    secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+  secret: ${JWT_KEY}
+  expiration: ${JWT_EXPIRATION:3600000}

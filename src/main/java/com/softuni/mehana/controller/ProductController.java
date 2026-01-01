@@ -56,7 +56,7 @@ public class ProductController {
     @GetMapping("/add-product")
     public String addProduct(Model model) {
         model.addAttribute("addProductDto", new AddProductDto());
-        return "/admin/add-product";
+        return "admin/add-product";
     }
 
     @PostMapping("/add-product")

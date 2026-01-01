@@ -4,6 +4,9 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+.env
+target/
+*.jar
 
 ### STS ###
 .apt_generated
@@ -41,3 +44,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+.DS_Store
+Thumbs.db

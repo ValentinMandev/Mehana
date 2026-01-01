@@ -8,12 +8,15 @@ import com.softuni.mehana.service.CartService;
 import com.softuni.mehana.service.ProductService;
 import com.softuni.mehana.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -42,16 +45,28 @@ public class CartController {
     }
 
     @PostMapping("/cart/add")
-    public String addToCart(@RequestParam("productId") Long productId,
+    public ResponseEntity<?> addToCart(@RequestParam("productId") Long productId,
                             @RequestParam("quantity") int quantity,
+                            @RequestParam(value = "returnUrl", required = false) String returnUrl,
                             @AuthenticationPrincipal UserDetails userDetails,
-                            HttpServletRequest request) {
+                            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
+
+
         UserEntity user = userService.getCurrentUser(userDetails);
         ProductEntity product = productService.getProductById(productId);
         cartService.addToCart(product, quantity, user);
-        String referer = request.getHeader("Referer");
-        return "redirect:"+ referer;
+
+        if ("XMLHttpRequest".equals(requestedWith)) {
+		        return ResponseEntity.ok().body(Map.of("success", true, "message", "��������� � �������"));
     }
+
+        if (returnUrl != null && !returnUrl.isEmpty()) {
+			        return ResponseEntity.status(HttpStatus.FOUND).header("Location", returnUrl).build();
+	    }
+
+        return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/menu").build();
+    }
+
 
     @DeleteMapping("/cart/remove/{id}")
     public String removeCartItem(@PathVariable("id") Long id,
