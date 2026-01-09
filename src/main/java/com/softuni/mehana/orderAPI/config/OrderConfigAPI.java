@@ -41,7 +41,7 @@ public class OrderConfigAPI {
     }
 
     @Bean
-    public ModelMapper modelMapper() {
+    public ModelMapper modelMapperAPI() {
         return new ModelMapper();
     }
 }
