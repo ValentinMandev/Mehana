@@ -1,6 +1,7 @@
 package com.softuni.mehana.config;
 
 import com.softuni.mehana.model.enums.UserRoleEnum;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,6 +73,16 @@ public class SecurityConfiguration {
                                         .logoutUrl("/user/logout")
                                         .logoutSuccessUrl("/")
                                         .invalidateHttpSession(true)
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            String requestedWith = request.getHeader("X-Requested-With");
+                            if ("XMLHttpRequest".equals(requestedWith)) {
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            } else {
+                                response.sendRedirect("/user/login");
+                            }
+                        })
                 )
                 .build();
     }
