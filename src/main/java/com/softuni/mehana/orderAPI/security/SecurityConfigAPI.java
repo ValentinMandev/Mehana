@@ -3,6 +3,7 @@ package com.softuni.mehana.orderAPI.security;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,12 +14,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfigAPI {
 
     @Bean
+    @Order(1)
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
-            JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+            JwtAuthenticationFilterAPI jwtAuthenticationFilterAPI) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
@@ -28,7 +30,7 @@ public class SecurityConfig {
                                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilterAPI, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
     }

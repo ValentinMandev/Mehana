@@ -1,4 +1,4 @@
-package softuni.orderapi.model.dto;
+package com.softuni.mehana.orderAPI.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

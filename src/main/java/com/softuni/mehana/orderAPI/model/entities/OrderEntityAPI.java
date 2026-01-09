@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
-public class OrderEntity extends BaseEntity {
+public class OrderEntityAPI extends BaseEntity {
 
     @Column(nullable = false)
     private Long userId;
@@ -31,7 +31,7 @@ public class OrderEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_item_id")
     )
-    private Set<CartItemEntity> products;
+    private Set<CartItemEntityAPI> products;
 
     @Column(nullable = false)
     private String fullName;

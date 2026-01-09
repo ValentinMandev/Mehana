@@ -8,7 +8,7 @@ import com.softuni.mehana.orderAPI.model.dto.StoreOrderDto;
 
 import java.util.List;
 
-public interface OrderAPIService {
+public interface OrderServiceAPI {
     OrderDetailsDto getOrderDetails(Long userId, Long id);
 
     List<OrderDto> getAllOrders(Long userId);

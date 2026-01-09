@@ -3,7 +3,7 @@ package com.softuni.mehana.orderAPI.controller;
 import com.softuni.mehana.orderAPI.model.dto.OrderDetailsDto;
 import com.softuni.mehana.orderAPI.model.dto.OrderDto;
 import com.softuni.mehana.orderAPI.model.dto.StoreOrderDto;
-import com.softuni.mehana.orderAPI.service.OrderAPIService;
+import com.softuni.mehana.orderAPI.service.OrderServiceAPI;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,12 +24,12 @@ import java.util.List;
         name = "Orders",
         description = "The controller responsible for order storage."
 )
-public class OrderController {
+public class OrderControllerAPI {
 
-    private final OrderAPIService orderAPIService;
+    private final OrderServiceAPI orderServiceAPI;
 
-    public OrderController(OrderAPIService orderAPIService) {
-        this.orderAPIService = orderAPIService;
+    public OrderControllerAPI(OrderServiceAPI orderServiceAPI) {
+        this.orderServiceAPI = orderServiceAPI;
     }
 
 
@@ -63,7 +63,7 @@ public class OrderController {
     @GetMapping("/{user_id}/{id}")
     public ResponseEntity<OrderDetailsDto> getById(@PathVariable("user_id") Long userId, @PathVariable("id") Long id) {
         return ResponseEntity
-                .ok(orderAPIService.getOrderDetails(userId, id));
+                .ok(orderServiceAPI.getOrderDetails(userId, id));
     }
 
 
@@ -98,7 +98,7 @@ public class OrderController {
     @GetMapping("/all/{user_id}")
     public ResponseEntity<List<OrderDto>> getAll(@PathVariable("user_id") Long userId) {
         return ResponseEntity
-                .ok(orderAPIService.getAllOrders(userId));
+                .ok(orderServiceAPI.getAllOrders(userId));
     }
 
 
@@ -114,7 +114,7 @@ public class OrderController {
     public ResponseEntity<OrderDetailsDto> storeOrder(
             @RequestBody StoreOrderDto storeOrderDto
     ) {
-        OrderDetailsDto orderDto = orderAPIService.storeOrder(storeOrderDto);
+        OrderDetailsDto orderDto = orderServiceAPI.storeOrder(storeOrderDto);
         return ResponseEntity.
                 created(
                         ServletUriComponentsBuilder

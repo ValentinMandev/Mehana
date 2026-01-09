@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "cart_items")
-public class CartItemEntity extends BaseEntity {
+public class CartItemEntityAPI extends BaseEntity {
 
     @Column(nullable = false)
     private String productName;

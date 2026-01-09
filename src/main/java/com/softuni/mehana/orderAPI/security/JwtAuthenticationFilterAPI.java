@@ -1,5 +1,6 @@
 package com.softuni.mehana.orderAPI.security;
 
+import com.softuni.mehana.orderAPI.service.JwtServiceAPI;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,17 +11,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import softuni.orderapi.service.JwtService;
 
 import java.io.IOException;
 
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilterAPI extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtServiceAPI jwtServiceAPI;
 
-    public JwtAuthenticationFilter(JwtService jwtService) {
-        this.jwtService = jwtService;
+    public JwtAuthenticationFilterAPI(JwtServiceAPI jwtServiceAPI) {
+        this.jwtServiceAPI = jwtServiceAPI;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String jwtToken = authHeader.substring(7);
 
-        UserDetails userDetails = jwtService.extractUserInformation(jwtToken);
+        UserDetails userDetails = jwtServiceAPI.extractUserInformation(jwtToken);
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             SecurityContext context = SecurityContextHolder.getContext();

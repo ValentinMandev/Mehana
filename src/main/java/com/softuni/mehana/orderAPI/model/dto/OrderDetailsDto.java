@@ -1,8 +1,8 @@
-package softuni.orderapi.model.dto;
+package com.softuni.mehana.orderAPI.model.dto;
 
+import com.softuni.mehana.orderAPI.model.entities.CartItemEntityAPI;
 import lombok.Getter;
 import lombok.Setter;
-import softuni.orderapi.model.entities.CartItemEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ public class OrderDetailsDto {
 
     private LocalDateTime time;
 
-    private Set<CartItemEntity> products;
+    private Set<CartItemEntityAPI> products;
 
     private String fullName;
 

@@ -3,9 +3,9 @@ package com.softuni.mehana.orderAPI.service.implementation;
 import com.softuni.mehana.orderAPI.model.dto.OrderDetailsDto;
 import com.softuni.mehana.orderAPI.model.dto.OrderDto;
 import com.softuni.mehana.orderAPI.model.dto.StoreOrderDto;
-import com.softuni.mehana.orderAPI.model.entities.OrderEntity;
-import com.softuni.mehana.orderAPI.repository.OrderAPIRepository;
-import com.softuni.mehana.orderAPI.service.OrderAPIService;
+import com.softuni.mehana.orderAPI.model.entities.OrderEntityAPI;
+import com.softuni.mehana.orderAPI.repository.OrderRepositoryAPI;
+import com.softuni.mehana.orderAPI.service.OrderServiceAPI;
 import com.softuni.mehana.orderAPI.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,19 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class OrderAPIServiceImpl implements OrderAPIService {
+public class OrderServiceImplAPI implements OrderServiceAPI {
 
-    private final OrderAPIRepository orderAPIRepository;
+    private final OrderRepositoryAPI orderRepositoryAPI;
     private final ModelMapper modelMapper;
 
-    public OrderAPIServiceImpl(OrderAPIRepository orderAPIRepository, ModelMapper modelMapper) {
-        this.orderAPIRepository = orderAPIRepository;
+    public OrderServiceImplAPI(OrderRepositoryAPI orderRepositoryAPI, ModelMapper modelMapper) {
+        this.orderRepositoryAPI = orderRepositoryAPI;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public OrderDetailsDto getOrderDetails(Long userId, Long id) {
-        List<OrderEntity> ordersByUser = orderAPIRepository.findAllByUserId(userId);
+        List<OrderEntityAPI> ordersByUser = orderRepositoryAPI.findAllByUserId(userId);
         try {
             return ordersByUser
                     .stream()
@@ -43,7 +43,7 @@ public class OrderAPIServiceImpl implements OrderAPIService {
 
     @Override
     public List<OrderDto> getAllOrders(Long userId) {
-        List<OrderEntity> ordersByUser = orderAPIRepository.findAllByUserId(userId);
+        List<OrderEntityAPI> ordersByUser = orderRepositoryAPI.findAllByUserId(userId);
         try {
             return ordersByUser
                     .stream()
@@ -58,21 +58,21 @@ public class OrderAPIServiceImpl implements OrderAPIService {
 
     @Override
     public OrderDetailsDto storeOrder(StoreOrderDto storeOrderDto) {
-        OrderEntity order = map(storeOrderDto);
-        orderAPIRepository.save(order);
+        OrderEntityAPI order = map(storeOrderDto);
+        orderRepositoryAPI.save(order);
         return mapToOrderDetailsDto(order);
     }
 
-    private OrderDto mapToOrderDto(OrderEntity orderEntity) {
-        return modelMapper.map(orderEntity, OrderDto.class);
+    private OrderDto mapToOrderDto(OrderEntityAPI orderEntityAPI) {
+        return modelMapper.map(orderEntityAPI, OrderDto.class);
     }
 
-    private OrderDetailsDto mapToOrderDetailsDto(OrderEntity orderEntity) {
-        return modelMapper.map(orderEntity, OrderDetailsDto.class);
+    private OrderDetailsDto mapToOrderDetailsDto(OrderEntityAPI orderEntityAPI) {
+        return modelMapper.map(orderEntityAPI, OrderDetailsDto.class);
     }
 
-    private OrderEntity map(StoreOrderDto storeOrderDto) {
-        OrderEntity order = modelMapper.map(storeOrderDto, OrderEntity.class);
+    private OrderEntityAPI map(StoreOrderDto storeOrderDto) {
+        OrderEntityAPI order = modelMapper.map(storeOrderDto, OrderEntityAPI.class);
         order.setId(null);
         return order;
     }

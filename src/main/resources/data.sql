@@ -1,5 +1,3 @@
-use mehana;
-
 -- Products
 insert ignore into products(id, type, name, name_eng, price, image_url, is_on_promotion, is_enabled) values (1, 'STARTERS', 'Шопска салата', 'Shopska salad', 4.00, '/images/menu/prediastia/shopska.jpg', false, true);
 insert ignore into products(id, type, name, name_eng, price, image_url, is_on_promotion, is_enabled) values (2, 'STARTERS', 'Зелена салата', 'Green salad', 4.00, '/images/menu/prediastia/zelena.jpg', false, true);

@@ -15,11 +15,11 @@ import java.security.Key;
 import java.util.List;
 
 @Service
-public class JwtServiceAPIImpl implements JwtServiceAPI {
+public class JwtServiceImplAPI implements JwtServiceAPI {
 
     private final String jwtSecret;
 
-    public JwtServiceAPIImpl(@Value("${jwt.secret}") String jwtSecret) {
+    public JwtServiceImplAPI(@Value("${jwt.secret}") String jwtSecret) {
         this.jwtSecret = jwtSecret;
     }
 

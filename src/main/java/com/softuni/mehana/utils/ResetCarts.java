@@ -38,7 +38,7 @@ public class ResetCarts {
 
         entityManager.joinTransaction();
         entityManager
-                .createQuery("DELETE FROM CartItemEntity")
+                .createQuery("DELETE FROM CartItemEntityAPI")
                 .executeUpdate();
     }
 }
