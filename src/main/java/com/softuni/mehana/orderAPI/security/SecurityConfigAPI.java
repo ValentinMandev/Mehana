@@ -22,6 +22,7 @@ public class SecurityConfigAPI {
             HttpSecurity httpSecurity,
             JwtAuthenticationFilterAPI jwtAuthenticationFilterAPI) throws Exception {
         return httpSecurity
+                .securityMatcher("/api/**", "/orders/**")
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorize ->
