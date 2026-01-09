@@ -18,7 +18,7 @@ public class SecurityConfigAPI {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain securityFilterChain(
+    public SecurityFilterChain securityFilterChainAPI (
             HttpSecurity httpSecurity,
             JwtAuthenticationFilterAPI jwtAuthenticationFilterAPI) throws Exception {
         return httpSecurity
