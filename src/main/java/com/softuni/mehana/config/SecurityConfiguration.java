@@ -17,6 +17,7 @@ public class SecurityConfiguration {
     @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         authorizeRequests ->
                                 authorizeRequests
