@@ -294,7 +294,9 @@ function addReturnUrl(form) {
     .then(response => {
 
         if (response.status === 401 || response.status === 403) {
-            const returnUrl = encodeURIComponent(window.location.pathname + window.location.hash);
+            const activeTab = localStorage.getItem('activeTab') || window.location.hash;
+            const returnUrl = encodeURIComponent(window.location.pathname + activeTab);
+
             window.location.href = '/login?returnUrl=' + returnUrl;
             return;
         }
