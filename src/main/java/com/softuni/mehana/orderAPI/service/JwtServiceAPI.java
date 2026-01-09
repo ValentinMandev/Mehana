@@ -1,4 +1,4 @@
-package softuni.orderapi.service;
+package com.softuni.mehana.orderAPI.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

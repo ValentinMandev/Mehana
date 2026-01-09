@@ -1,4 +1,4 @@
-package softuni.orderapi.config;
+package com.softuni.mehana.orderAPI.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

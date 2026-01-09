@@ -1,4 +1,4 @@
-package softuni.orderapi.security;
+package com.softuni.mehana.orderAPI.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

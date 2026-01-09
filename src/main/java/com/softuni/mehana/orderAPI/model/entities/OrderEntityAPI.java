@@ -1,4 +1,4 @@
-package softuni.orderapi.model.entities;
+package com.softuni.mehana.orderAPI.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

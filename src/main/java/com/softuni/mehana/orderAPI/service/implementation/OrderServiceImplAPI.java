@@ -1,32 +1,33 @@
-package softuni.orderapi.service.implementation;
+package com.softuni.mehana.orderAPI.service.implementation;
 
+import com.softuni.mehana.orderAPI.model.dto.OrderDetailsDto;
+import com.softuni.mehana.orderAPI.model.dto.OrderDto;
+import com.softuni.mehana.orderAPI.model.dto.StoreOrderDto;
+import com.softuni.mehana.orderAPI.model.entities.OrderEntity;
+import com.softuni.mehana.orderAPI.repository.OrderAPIRepository;
+import com.softuni.mehana.orderAPI.service.OrderAPIService;
+import com.softuni.mehana.orderAPI.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.orderapi.model.dto.OrderDetailsDto;
-import softuni.orderapi.model.dto.OrderDto;
-import softuni.orderapi.model.dto.StoreOrderDto;
-import softuni.orderapi.model.entities.OrderEntity;
-import softuni.orderapi.repository.OrderRepository;
-import softuni.orderapi.service.OrderService;
-import softuni.orderapi.service.exception.ObjectNotFoundException;
+
 
 import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderAPIServiceImpl implements OrderAPIService {
 
-    private final OrderRepository orderRepository;
+    private final OrderAPIRepository orderAPIRepository;
     private final ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ModelMapper modelMapper) {
-        this.orderRepository = orderRepository;
+    public OrderAPIServiceImpl(OrderAPIRepository orderAPIRepository, ModelMapper modelMapper) {
+        this.orderAPIRepository = orderAPIRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public OrderDetailsDto getOrderDetails(Long userId, Long id) {
-        List<OrderEntity> ordersByUser = orderRepository.findAllByUserId(userId);
+        List<OrderEntity> ordersByUser = orderAPIRepository.findAllByUserId(userId);
         try {
             return ordersByUser
                     .stream()
@@ -42,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> getAllOrders(Long userId) {
-        List<OrderEntity> ordersByUser = orderRepository.findAllByUserId(userId);
+        List<OrderEntity> ordersByUser = orderAPIRepository.findAllByUserId(userId);
         try {
             return ordersByUser
                     .stream()
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDetailsDto storeOrder(StoreOrderDto storeOrderDto) {
         OrderEntity order = map(storeOrderDto);
-        orderRepository.save(order);
+        orderAPIRepository.save(order);
         return mapToOrderDetailsDto(order);
     }
 

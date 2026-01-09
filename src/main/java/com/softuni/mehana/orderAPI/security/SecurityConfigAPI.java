@@ -1,4 +1,4 @@
-package softuni.orderapi.security;
+package com.softuni.mehana.orderAPI.security;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;

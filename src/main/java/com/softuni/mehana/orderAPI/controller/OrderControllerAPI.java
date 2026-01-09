@@ -1,5 +1,9 @@
-package softuni.orderapi.controller;
+package com.softuni.mehana.orderAPI.controller;
 
+import com.softuni.mehana.orderAPI.model.dto.OrderDetailsDto;
+import com.softuni.mehana.orderAPI.model.dto.OrderDto;
+import com.softuni.mehana.orderAPI.model.dto.StoreOrderDto;
+import com.softuni.mehana.orderAPI.service.OrderAPIService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,10 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import softuni.orderapi.model.dto.OrderDetailsDto;
-import softuni.orderapi.model.dto.OrderDto;
-import softuni.orderapi.model.dto.StoreOrderDto;
-import softuni.orderapi.service.OrderService;
+
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ import java.util.List;
 )
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderAPIService orderAPIService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(OrderAPIService orderAPIService) {
+        this.orderAPIService = orderAPIService;
     }
 
 
@@ -62,7 +63,7 @@ public class OrderController {
     @GetMapping("/{user_id}/{id}")
     public ResponseEntity<OrderDetailsDto> getById(@PathVariable("user_id") Long userId, @PathVariable("id") Long id) {
         return ResponseEntity
-                .ok(orderService.getOrderDetails(userId, id));
+                .ok(orderAPIService.getOrderDetails(userId, id));
     }
 
 
@@ -97,7 +98,7 @@ public class OrderController {
     @GetMapping("/all/{user_id}")
     public ResponseEntity<List<OrderDto>> getAll(@PathVariable("user_id") Long userId) {
         return ResponseEntity
-                .ok(orderService.getAllOrders(userId));
+                .ok(orderAPIService.getAllOrders(userId));
     }
 
 
@@ -113,7 +114,7 @@ public class OrderController {
     public ResponseEntity<OrderDetailsDto> storeOrder(
             @RequestBody StoreOrderDto storeOrderDto
     ) {
-        OrderDetailsDto orderDto = orderService.storeOrder(storeOrderDto);
+        OrderDetailsDto orderDto = orderAPIService.storeOrder(storeOrderDto);
         return ResponseEntity.
                 created(
                         ServletUriComponentsBuilder

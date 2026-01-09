@@ -1,12 +1,12 @@
-package softuni.orderapi.service.implementation;
+package com.softuni.mehana.orderAPI.service.implementation;
 
+import com.softuni.mehana.orderAPI.service.JwtServiceAPI;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import softuni.orderapi.service.JwtService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -15,11 +15,11 @@ import java.security.Key;
 import java.util.List;
 
 @Service
-public class JwtServiceImpl implements JwtService {
+public class JwtServiceAPIImpl implements JwtServiceAPI {
 
     private final String jwtSecret;
 
-    public JwtServiceImpl(@Value("${jwt.secret}") String jwtSecret) {
+    public JwtServiceAPIImpl(@Value("${jwt.secret}") String jwtSecret) {
         this.jwtSecret = jwtSecret;
     }
 
