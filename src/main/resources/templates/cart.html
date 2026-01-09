@@ -43,7 +43,7 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit" id="clear-cart" class="btn-danger btn">Изпразни количката</button>
         </form>
-        <h3>Крайна цена: <span th:text="${price}"></span> лв.</h3>
+        <h3>Крайна цена: <span th:text="${price}"></span> EUR</h3>
         <a type="submit" id="checkout" class="btn btn-success"
                 th:href="@{/checkout}" th:method="get" th:if="${price > 0}">Към завършване на поръчката</a>
     </div>
