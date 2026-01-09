@@ -7,6 +7,8 @@ build/
 .env
 target/
 *.jar
+Zapiski.docx
+Spring Advanced - Project Assignments - June 2024.docx
 
 ### STS ###
 .apt_generated
