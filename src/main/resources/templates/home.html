@@ -78,6 +78,62 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    // AJAX submit without page reload
+    function addReturnUrl(form) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Продуктът е добавен в количката!', 'success');
+                } else {
+                    showNotification('Грешка при добавяне в количката', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Грешка при добавяне в количката', 'error');
+            });
+
+        return false;
+    }
+
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = 'alert alert-' + (type === 'success' ? 'success' : 'danger') + ' notification-popup';
+        notification.textContent = message;
+        notification.style.cssText = 'position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 300px;';
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.transition = 'opacity 0.5s';
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 500);
+        }, 3000);
+    }
+
+    function updateCartCount() {
+        fetch('/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                const cartBadge = document.querySelector('.cart-count');
+                if (cartBadge) {
+                    cartBadge.textContent = data.count;
+                }
+            })
+            .catch(error => console.error('Error updating cart count:', error));
+    }
+</script>
 </body>
 </html>
 
