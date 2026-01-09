@@ -8,6 +8,8 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import java.util.Locale;
+
 @Configuration
 public class I18nConfiguration {
 
@@ -22,7 +24,9 @@ public class I18nConfiguration {
 
     @Bean
     public LocaleResolver localeResolver() {
-        return new CookieLocaleResolver("lang");
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver("lang");
+        cookieLocaleResolver.setDefaultLocale(new Locale("bg"));
+        return cookieLocaleResolver;
     }
 
     @Bean
