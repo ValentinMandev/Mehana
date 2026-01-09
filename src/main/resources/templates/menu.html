@@ -292,6 +292,13 @@ function addReturnUrl(form) {
         }
     })
     .then(response => {
+
+        if (response.status === 401 || response.status === 403) {
+            const returnUrl = encodeURIComponent(window.location.pathname + (localStorage.getItem('activeTab') || ''));
+            window.location.href = '/login?returnUrl=' + returnUrl;
+            return;
+        }
+
         if (response.ok) {
             showNotification('Продуктът е добавен в количката!', 'success');
         } else {

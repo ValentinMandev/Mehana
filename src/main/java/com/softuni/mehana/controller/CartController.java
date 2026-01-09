@@ -51,6 +51,16 @@ public class CartController {
                             @AuthenticationPrincipal UserDetails userDetails,
                             @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
 
+        if (userDetails == null) {
+            if ("XMLHttpRequest".equals(requestedWith)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "Not authenticated"));
+            } else {
+                return ResponseEntity.status(HttpStatus.FOUND)
+                        .header("Location", "/login")
+                        .build();
+            }
+        }
 
         UserEntity user = userService.getCurrentUser(userDetails);
         ProductEntity product = productService.getProductById(productId);
