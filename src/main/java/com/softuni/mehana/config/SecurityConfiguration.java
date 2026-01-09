@@ -56,13 +56,12 @@ public class SecurityConfiguration {
                                 .loginPage("/user/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
-                                // Премахваме .defaultSuccessUrl("/", true) и добавяме това:
                                 .successHandler((request, response, authentication) -> {
                                     String returnUrl = request.getParameter("returnUrl");
                                     if (returnUrl != null && !returnUrl.isEmpty() && !returnUrl.equals("null")) {
                                         response.sendRedirect(returnUrl);
                                     } else {
-                                        response.sendRedirect("/"); // по подразбиране
+                                        response.sendRedirect("/");
                                     }
                                 })
                                 .failureUrl("/user/login?error")

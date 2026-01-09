@@ -21,7 +21,7 @@
     </div>
 
     <form th:action="@{/user/login(returnUrl=${returnUrl})}" th:method="post" class="login-form">
-        <input type="hidden" name="returnUrl" th:value="${returnUrl}"/>
+        <input type="hidden" name="returnUrl" th:value="${param.returnUrl}" />
         <div class="form-group">
             <label for="username" th:text="#{login_username}">Потребителско име</label>
             <input type="text" class="form-control" id="username" name="username" >
