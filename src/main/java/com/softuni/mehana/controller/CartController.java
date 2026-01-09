@@ -55,6 +55,10 @@ public class CartController {
             if ("XMLHttpRequest".equals(requestedWith)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(Map.of("error", "Not authenticated"));
+            } else {
+                return ResponseEntity.status(HttpStatus.FOUND)
+                        .header("Location", "/login")
+                        .build();
             }
         }
 
