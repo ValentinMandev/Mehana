@@ -36,19 +36,4 @@ public class SecurityConfigAPI {
 
     }
 
-    @Bean
-    public AuthenticationProvider noopAuthenticationProvider() {
-        return new AuthenticationProvider() {
-            @Override
-            public Authentication authenticate(Authentication authentication)
-                    throws AuthenticationException {
-                return null;
-            }
-
-            @Override
-            public boolean supports(Class<?> authentication) {
-                return false;
-            }
-        };
-    }
 }
