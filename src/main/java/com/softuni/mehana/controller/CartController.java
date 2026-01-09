@@ -62,8 +62,6 @@ public class CartController {
             }
         }
 
-
-
         UserEntity user = userService.getCurrentUser(userDetails);
         ProductEntity product = productService.getProductById(productId);
         cartService.addToCart(product, quantity, user);
