@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "cart_items")
+@Table(name = "cart_items_api")
 public class CartItemEntityAPI extends BaseEntity {
 
     @Column(nullable = false)
