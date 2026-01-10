@@ -25,7 +25,7 @@ public class I18nConfiguration {
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver("lang");
-        cookieLocaleResolver.setDefaultLocale(new Locale("bg"));
+        cookieLocaleResolver.setDefaultLocale(new Locale("bg", "BG"));
         return cookieLocaleResolver;
     }
 
