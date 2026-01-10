@@ -23,7 +23,7 @@
     <h2 class="text-center" th:text="#{home_promotions}">Промоции</h2>
     <div class="row">
         <div class="col-md-4" th:each="p : ${promotions}"  th:if="${p.product.isEnabled()}">
-            <div class="card">
+            <div class="card menu-card">
                 <img th:src="*{p.getProduct().imageUrl}" th:alt="*{p.getProduct().nameEng}" class="card-img-top">
                 <div class="card-body">
                     <div th:switch="${#locale.toString()}">
