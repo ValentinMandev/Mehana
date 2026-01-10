@@ -65,6 +65,8 @@ body {
 
 .review-card {
     height: 135px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .menu-card {
@@ -207,6 +209,10 @@ footer {
 .notification-popup {
     animation: slideIn 0.3s ease-out;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.menu-card {
+    margin-bottom: 15px;
 }
 
 @keyframes slideIn {
