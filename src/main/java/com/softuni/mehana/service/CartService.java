@@ -4,7 +4,6 @@ import com.softuni.mehana.model.entities.CartEntity;
 import com.softuni.mehana.model.entities.CartItemEntity;
 import com.softuni.mehana.model.entities.ProductEntity;
 import com.softuni.mehana.model.entities.UserEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
