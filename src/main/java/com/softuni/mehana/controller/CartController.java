@@ -7,7 +7,6 @@ import com.softuni.mehana.model.entities.UserEntity;
 import com.softuni.mehana.service.CartService;
 import com.softuni.mehana.service.ProductService;
 import com.softuni.mehana.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

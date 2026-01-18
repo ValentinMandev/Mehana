@@ -12,7 +12,6 @@ import com.softuni.mehana.service.UserService;
 import com.softuni.mehana.service.exception.CartItemEntityNotFoundException;
 import com.softuni.mehana.service.exception.NullCartItemEntitiesException;
 import com.softuni.mehana.service.exception.ProductDisabledException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
