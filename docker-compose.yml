@@ -3,7 +3,7 @@ services:
     image: postgres:18
     container_name: mehana-postgres
     environment:
-      POSTGRES_USERNAME : ${POSTGRES_USERNAME}
+      POSTGRES_USER : ${POSTGRES_USER}
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
@@ -24,7 +24,7 @@ services:
       - "8080:8080"
     environment:
       POSTGRES_URL: ${POSTGRES_URL}
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: mehana
       JWT_KEY: ${JWT_KEY}
