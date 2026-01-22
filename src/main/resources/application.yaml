@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/mehana}
+    url: ${POSTGRES_URL}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
@@ -32,6 +32,10 @@ spring:
   thymeleaf:
     check-template-location: true
     cache: true
+    
+  task:
+    scheduling:
+      enabled: true
 
 server:
   port: ${PORT:8080}
