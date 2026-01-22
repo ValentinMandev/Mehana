@@ -3,6 +3,7 @@ services:
     image: postgres:18
     container_name: mehana-postgres
     environment:
+      POSTGRES_DB: mehana
       POSTGRES_USER : ${POSTGRES_USER}
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
     ports:
