@@ -1,16 +1,14 @@
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mehana-mysql
+  postgres:
+    image: postgres:18
+    container_name: mehana-postgres
     environment:
-      MYSQL_USER: ${SPRING_DATASOURCE_USERNAME}
-      MYSQL_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql
-    command: --default-authentication-plugin=mysql_native_password
+      - postgres_data:/var/lib/postgresql
 
 
   app:
@@ -19,16 +17,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mehana?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mehana?currentSchema=public&ssl=true
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: mehana
       JWT_KEY: ${JWT_KEY}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
       OFFERS_BASE_URL: ${OFFERS_BASE_URL}
     depends_on:
-      - mysql
-      - orders-api
+      - postgres
     restart: on-failure
 
 volumes:
-  mysql_data:
+  postgres_data:
