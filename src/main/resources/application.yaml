@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${POSTGRES_URL}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/mehana}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
