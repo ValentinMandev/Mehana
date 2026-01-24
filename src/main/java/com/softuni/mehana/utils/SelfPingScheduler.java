@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 public class SelfPingScheduler {
 
     @Autowired
-    private UserRepository userRepository; // или друго repository
+    private UserRepository userRepository;
 
-    @Scheduled(fixedRate = 6000) // 14 минути
+    @Scheduled(fixedRate = 6000)
     public void keepAlive() {
         userRepository.count();
     }
