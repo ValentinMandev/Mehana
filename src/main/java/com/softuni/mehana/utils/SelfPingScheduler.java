@@ -1,5 +1,8 @@
 package com.softuni.mehana.utils;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -8,10 +11,12 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 public class SelfPingScheduler {
 
-    private long pingCount = 0;
+    @Autowired
+    private EntityManager entityManager;
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 6000) // 14 минути
+    @Transactional
     public void keepAlive() {
-        pingCount++;
+        entityManager.createNativeQuery("SELECT 1").getSingleResult();
     }
 }
