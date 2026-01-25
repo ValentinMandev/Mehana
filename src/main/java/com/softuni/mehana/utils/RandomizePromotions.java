@@ -28,7 +28,7 @@ public class RandomizePromotions {
         this.resetCarts = resetCarts;
     }
 
-    @Scheduled(cron = "0 0 0 * * *", zone = "GMT+2")
+    @Scheduled(cron = "0 0 0 * * ?", zone = "GMT+2")
     public void definePromotions() {
         resetCarts.reset();
         clearPromotions();
