@@ -35,7 +35,9 @@
 
         <button type="submit" class="btn btn-primary" th:text="#{login_text}">Вход</button>
     </form>
-    <button type="button" class="btn btn-primary" th:text="#{register_text}">Регистрация</button>
+    <p></p>
+    <a type="submit" id="register" class="btn"
+       th:href="@{/register}" th:method="get" th:text="#{register_from_login_page}>Нямате профил? Регистрирайте се тук</a>
 
 </div>
 <footer th:replace="~{fragments/commons :: footer}"></footer>
